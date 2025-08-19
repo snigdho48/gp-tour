@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 // Import components
 import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle } from './components';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 
 // Import constants and utilities
 import { ALL_TRIP_OPTIONS } from './constants/tripData.js';
@@ -68,11 +69,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-black">
-      <div className="min-h-screen w-full max-w-7xl mx-auto p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
+      {/* Theme Toggle Button */}
+      <div className="fixed top-8 right-4 z-10 ">
         <ThemeToggle />
-        
-        <BudgetForm 
+      </div>
+      
+      <div className="container mx-auto px-4 py-8">
+        <BudgetForm
           budgetBDT={budgetBDT}
           setBudgetBDT={setBudgetBDT}
           people={people}
@@ -80,66 +84,41 @@ function App() {
           onGenerate={handleGenerateSuggestions}
           isLoading={isLoading}
         />
-
-        <ErrorMessage message={error} />
-
-        {/* Results Container - maintains consistent height */}
-        <div className="relative min-h-[600px] w-full">
-          {/* Exiting Cards - fade out one by one with absolute positioning */}
-          {exitingSuggestions.length > 0 && (
-            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {exitingSuggestions.map((opt, idx) => (
-                <div
-                  key={`exiting-${opt.name}-${idx}`}
-                  className="animate-fade-out"
-                  style={{
-                    animationDelay: `${idx * 100}ms`,
-                    animationFillMode: 'both'
-                  }}
-                >
-                  <TripCard 
-                    option={opt} 
-                    people={people}
-                    onViewDetails={handleViewDetails}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* New Cards - fade in one by one */}
-          {suggestions.length > 0 && (
-            <div 
-              key={`grid-${transitionKey}`}
-              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-            >
+        
+        {error && (
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-6 text-red-700 dark:text-red-300 font-inter">
+            {error}
+          </div>
+        )}
+        
+        {suggestions.length > 0 && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-6 font-telenor">
+              Your Trip Suggestions
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {suggestions.map((opt, idx) => (
-                <div
+                <TripCard 
                   key={`${opt.name}-${idx}-${transitionKey}`}
-                  className="animate-fade-in-up"
-                  style={{
-                    animationDelay: `${idx * 150}ms`,
-                    animationFillMode: 'both'
-                  }}
-                >
-                  <TripCard 
-                    option={opt} 
-                    people={people}
-                    onViewDetails={handleViewDetails}
-                  />
-                </div>
+                  option={opt} 
+                  people={people}
+                  onViewDetails={handleViewDetails}
+                />
               ))}
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Empty State with fade in */}
-          {suggestions.length === 0 && exitingSuggestions.length === 0 && !error && !isLoading && (
-            <div className="animate-fade-in w-full">
-              <EmptyState />
-            </div>
-          )}
-        </div>
+        {/* Empty State with fade in */}
+        {suggestions.length === 0 && exitingSuggestions.length === 0 && !error && !isLoading && (
+          <div className="animate-fade-in w-full">
+            <EmptyState />
+          </div>
+        )}
       </div>
+      
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
     </div>
   );
 }

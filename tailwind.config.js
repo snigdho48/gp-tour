@@ -8,7 +8,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        'telenor': ['TelenorEvolution', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
       },
       colors: {
         primary: {

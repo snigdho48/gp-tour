@@ -36,13 +36,13 @@ function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 cursor-pointer"
+      className="p-2 sm:p-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 cursor-pointer"
       aria-label="Toggle theme"
     >
-      <div className="relative w-6 h-6">
+      <div className="relative w-5 h-5 sm:w-6 sm:h-6">
         {/* Sun Icon - shown when in dark mode */}
         <svg
-          className={`w-6 h-6 text-yellow-500 transition-all duration-300 ${
+          className={`w-5 h-5 sm:w-6 sm:h-6 text-yellow-500 transition-all duration-300 ${
             isDark ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'
           }`}
           fill="currentColor"
@@ -57,7 +57,7 @@ function ThemeToggle() {
         
         {/* Moon Icon - shown when in light mode */}
         <svg
-          className={`absolute inset-0 w-6 h-6 text-blue-400 transition-all duration-300 ${
+          className={`absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 text-blue-400 transition-all duration-300 ${
             isDark ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'
           }`}
           fill="currentColor"
