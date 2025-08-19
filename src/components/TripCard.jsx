@@ -9,10 +9,10 @@ function TripCard({ option, people, onViewDetails }) {
   return (
     <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] h-full flex flex-col group">
       {/* Header - more subtle */}
-      <div className="bg-gradient-to-r from-gray-600 to-gray-700 dark:from-gray-700 dark:to-gray-800 p-6 text-white transition-all duration-500 group-hover:from-gray-500 group-hover:to-gray-600 dark:group-hover:from-gray-600 dark:group-hover:to-gray-700">
+      <div className="bg-gradient-to-r from-teal-600 to-slate-600 dark:from-gray-700 dark:to-gray-800 p-6 text-white transition-all duration-500">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-xl font-bold transition-all duration-300 group-hover:scale-105">{option.name}</h3>
-          <span className={`text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
+          <h3 className="text-xl font-bold transition-all duration-300">{option.name}</h3>
+          <span className={`text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm transition-all duration-300 ${
             option.type === 'International' 
               ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white' 
               : option.type === 'Domestic' 
@@ -22,9 +22,9 @@ function TripCard({ option, people, onViewDetails }) {
             {option.type}
           </span>
         </div>
-        <p className="text-gray-200 text-sm opacity-90 transition-all duration-300 group-hover:opacity-100">{option.stay}</p>
+        <p className="text-teal-100 dark:text-gray-200 text-sm opacity-90 transition-all duration-300">{option.stay}</p>
         {option.nights > 0 && (
-          <span className="text-gray-300 text-sm transition-all duration-300 group-hover:text-white">
+          <span className="text-teal-200 dark:text-gray-300 text-sm transition-all duration-300">
             {option.nights} night{option.nights > 1 ? 's' : ''}
           </span>
         )}
@@ -33,14 +33,14 @@ function TripCard({ option, people, onViewDetails }) {
       {/* Content */}
       <div className="p-6 flex-1 flex flex-col">
         {/* Key highlights - more subtle colors */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md">
             <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">
               {fmtBDT(breakdown.total)}
             </div>
             <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">Total Cost</div>
           </div>
-          <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+          <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 transition-all duration-300 shadow-md">
             <div className="text-2xl font-bold text-green-700 dark:text-green-300">
               {fmtBDT(Math.round(breakdown.total / people))}
             </div>
@@ -49,11 +49,11 @@ function TripCard({ option, people, onViewDetails }) {
         </div>
 
         {/* Highlights section */}
-        <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-300 hover:shadow-md">
+        <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-300 shadow-md">
           <div className="font-semibold mb-3 text-sm text-gray-800 dark:text-gray-200">Highlights</div>
           <ul className="list-disc list-inside space-y-1 text-sm">
             {option.highlights.map((h, i) => (
-              <li key={i} className="text-gray-600 dark:text-gray-300 transition-all duration-200 hover:text-gray-800 dark:hover:text-gray-100">{h}</li>
+              <li key={i} className="text-gray-600 dark:text-gray-300 transition-all duration-200">{h}</li>
             ))}
           </ul>
           
@@ -62,7 +62,7 @@ function TripCard({ option, people, onViewDetails }) {
               <div className="font-semibold mb-2 mt-4 text-sm text-gray-800 dark:text-gray-200">GPStar Perks</div>
               <ul className="list-disc list-inside space-y-1 text-sm">
                 {option.gpstarOffers.extras.map((x, i) => (
-                  <li key={i} className="text-blue-600 dark:text-blue-400 font-medium transition-all duration-200 hover:text-blue-700 dark:hover:text-blue-300">{x}</li>
+                  <li key={i} className="text-blue-600 dark:text-blue-400 font-medium transition-all duration-200">{x}</li>
                 ))}
               </ul>
             </>
@@ -70,11 +70,11 @@ function TripCard({ option, people, onViewDetails }) {
         </div>
 
         {/* Itinerary section */}
-        <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-300 hover:shadow-md">
+        <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-300 shadow-md">
           <div className="font-semibold mb-3 text-sm text-gray-800 dark:text-gray-200">Sample Itinerary</div>
           <ol className="list-decimal list-inside space-y-1 text-sm">
             {option.itinerary.map((d, i) => (
-              <li key={i} className="text-gray-600 dark:text-gray-300 transition-all duration-200 hover:text-gray-800 dark:hover:text-gray-100">{d}</li>
+              <li key={i} className="text-gray-600 dark:text-gray-300 transition-all duration-200">{d}</li>
             ))}
           </ol>
         </div>
@@ -82,14 +82,14 @@ function TripCard({ option, people, onViewDetails }) {
         {/* Breakdown toggle */}
         <button
           onClick={() => setShowBreakdown(!showBreakdown)}
-          className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-sm font-medium mb-4 transition-all duration-300 cursor-pointer hover:scale-105"
+          className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-sm font-medium mb-4 transition-all duration-300 cursor-pointer"
         >
           {showBreakdown ? 'Hide' : 'Show'} Cost Breakdown
         </button>
 
         {/* Cost breakdown with slide animation */}
         {showBreakdown && (
-          <div className="space-y-3 mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 animate-fade-in">
+          <div className="space-y-3 mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 animate-fade-in shadow-md">
             <div className="flex justify-between text-sm">
               <span className="text-gray-600 dark:text-gray-300">Flight Cost:</span>
               <span className="font-medium text-gray-900 dark:text-white">{fmtBDT(breakdown.flight)}</span>
@@ -121,7 +121,7 @@ function TripCard({ option, people, onViewDetails }) {
 
         {/* Savings info - more subtle */}
         {(breakdown.savingsFlight > 0 || breakdown.savingsHotel > 0) && (
-          <div className="mb-6 p-3 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+          <div className="mb-6 p-3 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 transition-all duration-300 shadow-md">
             <div className="text-center">
               <div className="text-lg font-bold text-green-700 dark:text-green-400">
                 GPStar Savings!
@@ -137,7 +137,7 @@ function TripCard({ option, people, onViewDetails }) {
         <div className="mt-auto pt-4">
           <button
             onClick={() => onViewDetails(option)}
-            className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+            className="w-full bg-gradient-to-r from-teal-600 to-slate-600 hover:from-teal-700 hover:to-slate-700 dark:from-gray-600 dark:to-gray-700 dark:hover:from-gray-700 dark:hover:to-gray-800 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 cursor-pointer"
           >
             View Details
           </button>
