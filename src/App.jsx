@@ -75,7 +75,7 @@ function App() {
         <ThemeToggle />
       </div>
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-7xl">
         <BudgetForm
           budgetBDT={budgetBDT}
           setBudgetBDT={setBudgetBDT}
@@ -86,35 +86,68 @@ function App() {
         />
         
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-6 text-red-700 dark:text-red-300 font-inter">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm">
             {error}
           </div>
         )}
         
-        {suggestions.length > 0 && (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-6 font-telenor">
-              Your Trip Suggestions
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {suggestions.map((opt, idx) => (
-                <TripCard 
-                  key={`${opt.name}-${idx}-${transitionKey}`}
-                  option={opt} 
-                  people={people}
-                  onViewDetails={handleViewDetails}
-                />
+        {/* Results Container - maintains consistent height */}
+        <div className="relative min-h-[600px] w-full">
+          
+          {/* Exiting Cards - fade out one by one with absolute positioning */}
+          {exitingSuggestions.length > 0 && (
+            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
+              {exitingSuggestions.map((opt, idx) => (
+                <div
+                  key={`exiting-${opt.name}-${idx}`}
+                  className="animate-fade-out"
+                  style={{
+                    animationDelay: `${idx * 100}ms`,
+                    animationFillMode: 'both'
+                  }}
+                >
+                  <TripCard 
+                    option={opt} 
+                    people={people}
+                    onViewDetails={handleViewDetails}
+                  />
+                </div>
               ))}
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Empty State with fade in */}
-        {suggestions.length === 0 && exitingSuggestions.length === 0 && !error && !isLoading && (
-          <div className="animate-fade-in w-full">
-            <EmptyState />
-          </div>
-        )}
+          {/* New Cards - fade in one by one */}
+          {suggestions.length > 0 && (
+            <div 
+              key={`grid-${transitionKey}`}
+              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12"
+            >
+              {suggestions.map((opt, idx) => (
+                <div
+                  key={`${opt.name}-${idx}-${transitionKey}`}
+                  className="animate-fade-in-up"
+                  style={{
+                    animationDelay: `${idx * 150}ms`,
+                    animationFillMode: 'both'
+                  }}
+                >
+                  <TripCard 
+                    option={opt} 
+                    people={people}
+                    onViewDetails={handleViewDetails}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty State with fade in */}
+          {suggestions.length === 0 && exitingSuggestions.length === 0 && !error && !isLoading && (
+            <div className="animate-fade-in w-full">
+              <EmptyState />
+            </div>
+          )}
+        </div>
       </div>
       
       {/* PWA Install Prompt */}
