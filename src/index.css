@@ -1,4 +1,41 @@
 @import "tailwindcss";
+
+/* Custom Fonts */
+@font-face {
+  font-family: 'TelenorEvolution';
+  src: url('./assets/fonts/TelenorEvolution-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TelenorEvolution';
+  src: url('./assets/fonts/TelenorEvolution-Normal.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TelenorEvolution';
+  src: url('./assets/fonts/TelenorEvolution-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TelenorEvolution';
+  src: url('./assets/fonts/TelenorEvolution-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TelenorEvolution';
+  src: url('./assets/fonts/TelenorEvolution-ExtraBoldSlanted.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant motion-safe (&:where(.motion-safe, .motion-safe *));
 @custom-variant motion-reduce (&:where(.motion-reduce, .motion-reduce *));
