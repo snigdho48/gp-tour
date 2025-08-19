@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './App.css';
-import './darkMode.css';
 
 // Import components
 import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle } from './components';

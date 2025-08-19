@@ -8,46 +8,29 @@ function ThemeToggle() {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    console.log('Initial theme setup:', { savedTheme, prefersDark });
+    // Check if we should start in dark mode
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
     
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    if (shouldBeDark) {
       document.documentElement.classList.add('dark');
-      document.body.classList.add('dark');
       setIsDark(true);
-      console.log('Dark mode enabled on mount');
     } else {
       document.documentElement.classList.remove('dark');
-      document.body.classList.remove('dark');
       setIsDark(false);
-      console.log('Light mode enabled on mount');
     }
   }, []);
 
   const toggleTheme = () => {
     const newDarkMode = !isDark;
-    console.log('Toggling theme from', isDark, 'to', newDarkMode);
-    
     setIsDark(newDarkMode);
     
     if (newDarkMode) {
       document.documentElement.classList.add('dark');
-      document.body.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      console.log('Dark mode enabled, classes added');
+      localStorage.theme = 'dark';
     } else {
       document.documentElement.classList.remove('dark');
-      document.body.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      console.log('Light mode enabled, classes removed');
+      localStorage.theme = 'light';
     }
-    
-    // Force a re-render
-    setTimeout(() => {
-      console.log('Current classes:', {
-        html: document.documentElement.classList.contains('dark'),
-        body: document.body.classList.contains('dark')
-      });
-    }, 100);
   };
 
   return (
