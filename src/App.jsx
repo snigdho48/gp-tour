@@ -6,6 +6,7 @@ import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle } from './c
 import TranslatedText from './components/TranslatedText';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 import LanguageToggle from './components/LanguageToggle';
+import LoadingOverlay from './components/LoadingOverlay';
 
 // Import constants and utilities
 import { ALL_TRIP_OPTIONS } from './constants/tripData.js';
@@ -25,7 +26,9 @@ function App() {
   const handleGenerateSuggestions = () => {
     console.log('Generating suggestions, current count:', suggestions.length);
     setError('');
+    console.log('Setting isLoading to true');
     setIsLoading(true);
+    console.log('isLoading should now be true');
     
     // If there are existing suggestions, fade them out one by one
     if (suggestions.length > 0) {
@@ -44,25 +47,25 @@ function App() {
         setExitingSuggestions([]); // Remove exiting cards
         setTransitionKey(prev => prev + 1);
         
-        // Generate new suggestions
-        setTimeout(() => {
-          const result = generateTripSuggestions(budgetBDT, people, ALL_TRIP_OPTIONS);
-          setError(result.error);
-          setSuggestions(result.suggestions);
-          setIsLoading(false);
-        }, 100);
-      }, (suggestions.length * exitDelay) + 800); // Wait for all exits + animation duration
+                 // Generate new suggestions
+         setTimeout(() => {
+           const result = generateTripSuggestions(budgetBDT, people, ALL_TRIP_OPTIONS);
+           setError(result.error);
+           setSuggestions(result.suggestions);
+           setIsLoading(false);
+         }, 2000); // Show loading for exactly 2 seconds
+       }, (suggestions.length * exitDelay) + 800); // Wait for all exits + animation duration
       
-    } else {
-      // No existing suggestions, generate immediately
-      console.log('No existing suggestions, generating immediately...');
-      setTimeout(() => {
-        const result = generateTripSuggestions(budgetBDT, people, ALL_TRIP_OPTIONS);
-        setError(result.error);
-        setSuggestions(result.suggestions);
-        setIsLoading(false);
-      }, 800);
-    }
+         } else {
+       // No existing suggestions, generate immediately
+       console.log('No existing suggestions, generating immediately...');
+       setTimeout(() => {
+         const result = generateTripSuggestions(budgetBDT, people, ALL_TRIP_OPTIONS);
+         setError(result.error);
+         setSuggestions(result.suggestions);
+         setIsLoading(false);
+       }, 2000); // Show loading for exactly 2 seconds
+     }
   };
 
   const handleViewDetails = (option) => {
@@ -159,6 +162,13 @@ function App() {
       
       {/* PWA Install Prompt */}
       <PWAInstallPrompt />
+      
+      {/* Loading Overlay */}
+      {isLoading && (
+         
+          <LoadingOverlay />
+       
+      )}
     </div>
   );
 }

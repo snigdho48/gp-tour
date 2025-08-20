@@ -141,7 +141,9 @@ const COMMON_TRANSLATIONS = {
     'Hide Cost Details': 'খরচের বিস্তারিত লুকান',
     'Show Cost Details': 'খরচের বিস্তারিত দেখুন',
     'Cost Details': 'খরচের বিস্তারিত',
-    'Budget Allocation': 'বাজেট বরাদ্দ'
+    'Budget Allocation': 'বাজেট বরাদ্দ',
+    'Planning Your Trip': 'আপনার ট্রিপ পরিকল্পনা করার জন্য',
+    'We\'re finding the perfect destinations for you...': 'আমরা আপনার জন্য নিখুঁত গন্তব্য খুঁজছি...',
   }
 };
 
