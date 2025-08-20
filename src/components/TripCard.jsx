@@ -63,9 +63,9 @@ function TripCard({ option, people, onViewDetails }) {
             className='font-semibold mb-3 text-center text-sm sm:text-base text-blue-800 dark:text-blue-200 font-telenor break-words leading-tight'
             as='div'
           />
-          <div className='grid grid-cols-2 gap-2 sm:gap-3'>
+          <div className='grid grid-cols-2 gap-1 sm:gap-2'>
             <div className='text-center p-3 sm:p-4 bg-blue-100 dark:bg-blue-800/30 rounded-lg sm:rounded-xl border border-blue-300 dark:border-blue-700 transition-all duration-300'>
-              <div className='text-lg sm:text-2xl font-bold text-blue-700 dark:text-blue-300 break-words leading-tight'>
+              <div className='text-lg sm:text-xl font-bold text-blue-700 dark:text-blue-300 break-words leading-tight whitespace-nowrap'>
                 {fmtBDT(breakdown.total)}
               </div>
               <TranslatedText
@@ -75,7 +75,7 @@ function TripCard({ option, people, onViewDetails }) {
               />
             </div>
             <div className='text-center p-3 sm:p-4 bg-green-100 dark:bg-green-800/30 rounded-lg sm:rounded-xl border border-green-300 dark:border-green-700 transition-all duration-300'>
-              <div className='text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300 break-words leading-tight'>
+              <div className='text-lg sm:text-xl font-bold text-green-700 dark:text-green-300 break-words leading-tight whitespace-nowrap'>
                 {fmtBDT(Math.round(breakdown.total / people))}
               </div>
               <TranslatedText
@@ -171,7 +171,7 @@ function TripCard({ option, people, onViewDetails }) {
                     text='Flight'
                     className='text-blue-700 dark:text-blue-300 font-medium'
                   />
-                  <span className='font-semibold text-blue-800 dark:text-blue-200 break-words leading-tight'>
+                  <span className='font-semibold text-blue-800 dark:text-blue-200 break-words leading-tight whitespace-nowrap'>
                     {fmtBDT(breakdown.flight)}
                   </span>
                 </div>
@@ -204,7 +204,7 @@ function TripCard({ option, people, onViewDetails }) {
                     text='Hotel'
                     className='text-green-700 dark:text-green-300 font-medium'
                   />
-                  <span className='font-semibold text-green-800 dark:text-green-200 break-words leading-tight'>
+                  <span className='font-semibold text-green-800 dark:text-green-200 break-words leading-tight whitespace-nowrap'>
                     {fmtBDT(breakdown.hotel)}
                   </span>
                 </div>
@@ -237,7 +237,7 @@ function TripCard({ option, people, onViewDetails }) {
                     text='Activities'
                     className='text-purple-700 dark:text-purple-300 font-medium'
                   />
-                  <span className='font-semibold text-purple-800 dark:text-purple-200 break-words leading-tight'>
+                  <span className='font-semibold text-purple-800 dark:text-purple-200 break-words leading-tight whitespace-nowrap'>
                     {fmtBDT(breakdown.activities)}
                   </span>
                 </div>
@@ -272,7 +272,7 @@ function TripCard({ option, people, onViewDetails }) {
                     text='Local Transport'
                     className='text-orange-700 dark:text-orange-300 font-medium'
                   />
-                  <span className='font-semibold text-orange-800 dark:text-orange-200 break-words leading-tight'>
+                  <span className='font-semibold text-orange-800 dark:text-orange-200 break-words leading-tight whitespace-nowrap'>
                     {fmtBDT(breakdown.transport)}
                   </span>
                 </div>
@@ -307,7 +307,7 @@ function TripCard({ option, people, onViewDetails }) {
                     text='Contingency (5%)'
                     className='text-red-700 dark:text-red-300 font-medium'
                   />
-                  <span className='font-semibold text-red-800 dark:text-red-200 break-words leading-tight'>
+                  <span className='font-semibold text-red-800 dark:text-red-200 break-words leading-tight whitespace-nowrap'>
                     {fmtBDT(breakdown.contingency)}
                   </span>
                 </div>
