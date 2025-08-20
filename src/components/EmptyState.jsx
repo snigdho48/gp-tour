@@ -13,12 +13,12 @@ function EmptyState() {
         <TranslatedText 
           text="Ready to Plan Your Trip?"
           as="h3"
-          className="text-lg font-medium text-gray-900 dark:text-white mb-2"
+          className="text-lg font-medium text-gray-900 dark:text-white mb-2 break-words leading-tight"
         />
         <TranslatedText 
           text="Enter your budget and the number of people traveling to get personalized trip suggestions. We'll help you find the perfect destination within your budget!"
           as="p"
-          className="text-gray-600 dark:text-gray-300 text-sm leading-6"
+          className="text-gray-600 dark:text-gray-300 text-sm leading-6 break-words leading-tight"
         />
       </div>
     </div>

@@ -16,7 +16,7 @@ function ErrorMessage({ message, onClose }) {
           <TranslatedText 
             text={message}
             as="p"
-            className="text-sm text-red-800 dark:text-red-200 font-medium"
+            className="text-sm text-red-800 dark:text-red-200 font-medium break-words leading-tight"
           />
         </div>
         {onClose && (

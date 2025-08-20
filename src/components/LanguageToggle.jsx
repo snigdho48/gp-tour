@@ -25,7 +25,7 @@ const LanguageToggle = () => {
 
   return (
     <div className="flex items-center gap-1">
-      <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 hidden sm:block">Language:</span>
+      <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 hidden sm:block break-words leading-tight">Language:</span>
       <div className="flex bg-gray-100 dark:bg-gray-800 rounded-lg p-0.5 sm:p-1 shadow-lg border border-gray-200 dark:border-gray-600">
         {languages.map((lang) => (
           <button
@@ -39,7 +39,7 @@ const LanguageToggle = () => {
             }`}
           >
             <span className="mr-0.5 sm:mr-1">{lang.flag}</span>
-            <span className="hidden sm:inline">{lang.name}</span>
+            <span className="hidden sm:inline break-words leading-tight">{lang.name}</span>
             {isChanging && currentLanguage === lang.code && (
               <div className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 border-2 border-white border-t-transparent rounded-full animate-spin ml-0.5 sm:ml-1"></div>
             )}

@@ -20,12 +20,12 @@ function TripCard({ option, people, onViewDetails }) {
         <div className='flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 rounded-t-xl sm:rounded-t-2xl'>
           <TranslatedText
             text={option.name}
-            className='text-lg sm:text-xl font-bold transition-all duration-300 font-telenor flex-1 min-w-0 truncate'
+            className='text-lg sm:text-xl font-bold transition-all duration-300 font-telenor flex-1 min-w-0 break-words leading-tight'
             as='h3'
           />
           <TranslatedText
             text={option.type}
-            className={`text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-full backdrop-blur-sm transition-all duration-300 flex-shrink-0 whitespace-nowrap ${
+            className={`text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-full backdrop-blur-sm transition-all duration-300 flex-shrink-0 break-words leading-tight ${
               option.type === "International"
                 ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
                 : option.type === "Domestic"
@@ -37,7 +37,7 @@ function TripCard({ option, people, onViewDetails }) {
         </div>
         <TranslatedText
           text={option.stay}
-          className='text-teal-100 dark:text-slate-200 text-xs sm:text-sm opacity-90 transition-all duration-300 font-inter'
+          className='text-teal-100 dark:text-slate-200 text-xs sm:text-sm opacity-90 transition-all duration-300 font-inter break-words leading-tight'
           as='p'
         />
         {option.nights > 0 && (
@@ -58,7 +58,7 @@ function TripCard({ option, people, onViewDetails }) {
         <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md'>
           <TranslatedText
             text='Budget Summary'
-            className='font-semibold mb-3 text-center text-sm sm:text-base text-blue-800 dark:text-blue-200 font-telenor'
+            className='font-semibold mb-3 text-center text-sm sm:text-base text-blue-800 dark:text-blue-200 font-telenor break-words leading-tight'
             as='div'
           />
           <div className='grid grid-cols-2 gap-3 sm:gap-4'>
@@ -68,7 +68,7 @@ function TripCard({ option, people, onViewDetails }) {
               </div>
               <TranslatedText
                 text='Total Cost'
-                className='text-xs text-blue-600 dark:text-blue-400 font-medium font-inter'
+                className='text-xs text-blue-600 dark:text-blue-400 font-medium font-inter break-words leading-tight'
                 as='div'
               />
             </div>
@@ -78,7 +78,7 @@ function TripCard({ option, people, onViewDetails }) {
               </div>
               <TranslatedText
                 text='Per Person'
-                className='text-xs text-green-600 dark:text-green-400 font-medium font-inter'
+                className='text-xs text-green-600 dark:text-green-400 font-medium font-inter break-words leading-tight'
                 as='div'
               />
             </div>
@@ -89,7 +89,7 @@ function TripCard({ option, people, onViewDetails }) {
         <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-300 shadow-md'>
           <TranslatedText
             text='Highlights'
-            className='font-semibold mb-2 sm:mb-3 text-xs sm:text-sm text-gray-800 dark:text-gray-200 font-telenor'
+            className='font-semibold mb-2 sm:mb-3 text-xs sm:text-sm text-gray-800 dark:text-gray-200 font-telenor break-words leading-tight'
             as='div'
           />
           <ul className='list-disc list-inside space-y-1 text-xs sm:text-sm font-inter'>
@@ -97,7 +97,7 @@ function TripCard({ option, people, onViewDetails }) {
               <TranslatedText
                 key={i}
                 text={h}
-                className='text-gray-600 dark:text-gray-300 transition-all duration-200'
+                className='text-gray-600 dark:text-gray-300 transition-all duration-200 break-words leading-tight'
                 as='li'
               />
             ))}
@@ -115,7 +115,7 @@ function TripCard({ option, people, onViewDetails }) {
                   <TranslatedText
                     key={i}
                     text={x}
-                    className='text-blue-600 dark:text-blue-400 font-medium transition-all duration-200'
+                    className='text-blue-600 dark:text-blue-400 font-medium transition-all duration-200 break-words leading-tight'
                     as='li'
                   />
                 ))}
@@ -136,7 +136,7 @@ function TripCard({ option, people, onViewDetails }) {
               <TranslatedText
                 key={i}
                 text={d}
-                className='text-gray-600 dark:text-gray-300 transition-all duration-200'
+                className='text-gray-600 dark:text-gray-300 transition-all duration-200 break-words leading-tight'
                 as='li'
               />
             ))}

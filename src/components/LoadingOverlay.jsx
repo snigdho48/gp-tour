@@ -34,10 +34,10 @@ const LoadingOverlay = () => {
         </div>
         
         {/* Loading Text */}
-        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2 break-words leading-tight">
           <TranslatedText text="Planning Your Trip" />
         </h3>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className="text-gray-600 dark:text-gray-300 break-words leading-tight">
           <TranslatedText text="We're finding the perfect destinations for you..." />
         </p>
       </div>
