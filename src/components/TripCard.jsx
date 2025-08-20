@@ -142,6 +142,9 @@ function TripCard({ option, people, onViewDetails }) {
             ))}
           </ol>
         </div>
+
+
+
         <button
           onClick={() => setShowBreakdown(!showBreakdown)}
           className='text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-xs sm:text-sm font-medium mb-3 sm:mb-4 transition-all duration-300 cursor-pointer font-inter'

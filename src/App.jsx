@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 // Import components
-import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle } from './components';
+import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle, GPStarOfferCategories } from './components';
 import TranslatedText from './components/TranslatedText';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 import LanguageToggle from './components/LanguageToggle';
@@ -158,6 +158,9 @@ function App() {
             </div>
           )}
         </div>
+
+        {/* GPStar Offer Categories Section - Displayed after trip suggestions */}
+        {suggestions.length > 0 && <GPStarOfferCategories />}
       </div>
       
       {/* PWA Install Prompt */}

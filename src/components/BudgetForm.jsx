@@ -13,7 +13,7 @@ function BudgetForm({ budgetBDT, setBudgetBDT, people, setPeople, onGenerate, is
           alt='GPStar Logo'
           className='w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12'
         />
-        <div className='flex flex-col sm:flex-row items-center gap-0 sm:gap-1 text-center min-w-0 mt-[1em]'>
+        <div className='flex flex-col sm:flex-row items-center gap-0 sm:gap-1 text-center min-w-0 mt-[.7em]'>
           <TranslatedText
             text='GPStar'
             as='span'

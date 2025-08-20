@@ -230,6 +230,33 @@ const COMMON_TRANSLATIONS = {
     'Evening: Return to Dhaka': 'সন্ধ্যা: ঢাকায় ফিরে আসা',
     
     // ===== END COMPLETE TRIP DATA TRANSLATIONS =====
+    
+    // ===== GPSTAR OFFER CATEGORIES TRANSLATIONS =====
+    
+    // GPStar Offer Categories Section
+    'GPStar Offer': 'জিপি স্টার অফার',
+    
+    // Category Names
+    'Travel Aggregators': 'ভ্রমণ সমষ্টিকারী',
+    'Transportation': 'পরিবহন',
+    'Hotels & Resorts (Domestic)': 'হোটেল এবং রিসোর্ট (অভ্যন্তরীণ)',
+    'Travel Insurance': 'ভ্রমণ বীমা',
+    'Travel Luggage & Bags': 'ভ্রমণ লগেজ এবং ব্যাগ',
+    'Holiday Outfits': 'ছুটির পোশাক',
+    'Travel Groups/Agencies': 'ভ্রমণ গ্রুপ/এজেন্সি',
+    'International Roaming': 'আন্তর্জাতিক রোমিং',
+    
+    // Examples
+    'GoZayaan, ShareTrip, Flight Expert': 'গোজায়ান, শেয়ারট্রিপ, ফ্লাইট এক্সপার্ট',
+    'US-Bangla, NovoAir, Shohoz, Garibook, Soudia': 'ইউএস-বাংলা, নভোএয়ার, শোহোজ, গারিবুক, সৌদিয়া',
+    'Seagull, Sayeman, Grand Sylhet': 'সিগাল, সায়েমান, গ্র্যান্ড সিলেট',
+    'Green Delta, MTB': 'গ্রিন ডেল্টা, এমটিবি',
+    'Sara Lifestyle, President Bags': 'সারা লাইফস্টাইল, প্রেসিডেন্ট ব্যাগ',
+    'Lotto, Apex, Ecstasy, Sailor': 'লটো, এপেক্স, এক্সট্যাসি, সেইলর',
+    'Wander Woman, FirstTrip': 'ওয়ান্ডার ওম্যান, ফার্স্টট্রিপ',
+    'GPStar Roaming Packages': 'জিপি স্টার রোমিং প্যাকেজ',
+    
+    // ===== END GPSTAR OFFER CATEGORIES TRANSLATIONS =====
   }
 };
 
