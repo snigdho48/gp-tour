@@ -116,7 +116,8 @@ const COMMON_TRANSLATIONS = {
     "Local Transport": "স্থানীয় পরিবহন",
     "Contingency (5%)": "অনাকাঙ্ক্ষিত (৫%)",
     "Total Budget:": "মোট বাজেট:",
-    "Per person:": "প্রতি ব্যক্তি:",
+         "Per person:": "প্রতি ব্যক্তি:",
+     "Per person": "প্রতি ব্যক্তি",
     "Show Detailed Breakdown": "বিস্তারিত বিভাজন দেখুন",
     "Hide Detailed Breakdown": "বিস্তারিত বিভাজন লুকান",
     "International flights typically cost 40-60% of total budget. Domestic flights are 15-25%.":

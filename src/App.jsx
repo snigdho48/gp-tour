@@ -24,15 +24,11 @@ function App() {
 
   // Generate trip suggestions using the utility function
   const handleGenerateSuggestions = () => {
-    console.log('Generating suggestions, current count:', suggestions.length);
     setError('');
-    console.log('Setting isLoading to true');
     setIsLoading(true);
-    console.log('isLoading should now be true');
     
     // If there are existing suggestions, fade them out one by one
     if (suggestions.length > 0) {
-      console.log('Starting staggered exit animation...');
       
       // Copy current suggestions to exiting state
       setExitingSuggestions([...suggestions]);
@@ -43,13 +39,17 @@ function App() {
       
       // After all cards have started exiting, wait for animation to complete
       setTimeout(() => {
-        console.log('All cards exited, generating new suggestions...');
         setExitingSuggestions([]); // Remove exiting cards
         setTransitionKey(prev => prev + 1);
         
                  // Generate new suggestions
          setTimeout(() => {
-           const result = generateTripSuggestions(budgetBDT, people, ALL_TRIP_OPTIONS);
+          let peopleCount = parseInt(people) || 1;
+          if(people === '' || peopleCount <= 0){
+            peopleCount = 1;
+            setPeople(1);
+          }
+           const result = generateTripSuggestions(budgetBDT, peopleCount, ALL_TRIP_OPTIONS);
            setError(result.error);
            setSuggestions(result.suggestions);
            setIsLoading(false);
@@ -60,7 +60,12 @@ function App() {
        // No existing suggestions, generate immediately
        console.log('No existing suggestions, generating immediately...');
        setTimeout(() => {
-         const result = generateTripSuggestions(budgetBDT, people, ALL_TRIP_OPTIONS);
+         let peopleCount = parseInt(people) || 1;
+         if(people === '' || peopleCount <= 0){
+           peopleCount = 1;
+           setPeople(1);
+         }
+         const result = generateTripSuggestions(budgetBDT, peopleCount, ALL_TRIP_OPTIONS);
          setError(result.error);
          setSuggestions(result.suggestions);
          setIsLoading(false);
@@ -106,7 +111,7 @@ function App() {
           
           {/* Exiting Cards - fade out one by one with absolute positioning */}
           {exitingSuggestions.length > 0 && (
-            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
+            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
               {exitingSuggestions.map((opt, idx) => (
                 <div
                   key={`exiting-${opt.name}-${idx}`}
@@ -130,7 +135,7 @@ function App() {
           {suggestions.length > 0 && (
             <div 
               key={`grid-${transitionKey}`}
-              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12"
+              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10"
             >
               {suggestions.map((opt, idx) => (
                 <div

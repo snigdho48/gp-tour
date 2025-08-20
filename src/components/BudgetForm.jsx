@@ -64,6 +64,7 @@ function BudgetForm({ budgetBDT, setBudgetBDT, people, setPeople, onGenerate, is
             value={people}
             onChange={(e) => setPeople(e.target.value)}
             placeholder='Enter number of people'
+            min='1'
             className='w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 hover:border-blue-400 dark:hover:border-blue-500 text-sm sm:text-base'
           />
         </div>
@@ -71,7 +72,7 @@ function BudgetForm({ budgetBDT, setBudgetBDT, people, setPeople, onGenerate, is
 
       <TranslatedButton
         onClick={onGenerate}
-        disabled={!budgetBDT || !people || isLoading}
+        disabled={!budgetBDT || isLoading}
         isLoading={isLoading}
         loadingText='Generating Suggestions...'
         normalText='Generate Trip Suggestions'
