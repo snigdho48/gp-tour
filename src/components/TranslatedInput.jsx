@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLanguage } from '../contexts/LanguageContext.jsx';
+import { useLanguage } from '../hooks/useLanguage.js';
 import { translateText } from '../utils/translation.js';
 
 /**

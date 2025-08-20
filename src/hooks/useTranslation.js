@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useLanguage } from '../contexts/LanguageContext.jsx';
+import { useLanguage } from './useLanguage.js';
 import { translateText, translateItinerary, translateOffers } from '../utils/translation.js';
 
 export const useTranslation = () => {

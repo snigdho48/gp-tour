@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../contexts/LanguageContext.jsx';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const LanguageToggle = () => {
   const { currentLanguage, changeLanguage } = useLanguage();
