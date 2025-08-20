@@ -1,4 +1,5 @@
 import React from 'react';
+import TranslatedText from './TranslatedText';
 
 function ErrorMessage({ message, onClose }) {
   if (!message) return null;
@@ -12,9 +13,11 @@ function ErrorMessage({ message, onClose }) {
           </svg>
         </div>
         <div className="ml-3 flex-1">
-          <p className="text-sm text-red-800 dark:text-red-200 font-medium">
-            {message}
-          </p>
+          <TranslatedText 
+            text={message}
+            as="p"
+            className="text-sm text-red-800 dark:text-red-200 font-medium"
+          />
         </div>
         {onClose && (
           <div className="ml-auto pl-3">

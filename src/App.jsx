@@ -3,7 +3,9 @@ import './App.css';
 
 // Import components
 import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle } from './components';
+import TranslatedText from './components/TranslatedText';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
+import LanguageToggle from './components/LanguageToggle';
 
 // Import constants and utilities
 import { ALL_TRIP_OPTIONS } from './constants/tripData.js';
@@ -70,10 +72,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
-      {/* Theme Toggle Button */}
-      <div className="fixed top-8 right-4 z-10 ">
-        <ThemeToggle />
-      </div>
+             {/* Theme Toggle Button */}
+       <div className="fixed top-4 right-4 z-10 sm:top-8">
+         <ThemeToggle />
+       </div>
+       
+       {/* Language Toggle Button */}
+       <div className="fixed top-4 left-4 z-10 sm:top-8">
+         <LanguageToggle />
+       </div>
       
       <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl">
         <BudgetForm
@@ -85,11 +92,11 @@ function App() {
           isLoading={isLoading}
         />
         
-        {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm">
-            {error}
-          </div>
-        )}
+                 {error && (
+           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm">
+             <TranslatedText text={error} />
+           </div>
+         )}
         
         {/* Results Container - maintains consistent height */}
         <div className="relative min-h-[600px] w-full">

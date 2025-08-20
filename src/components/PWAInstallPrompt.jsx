@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import TranslatedText from './TranslatedText';
+import TranslatedButton from './TranslatedButton';
 
 const PWAInstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -51,25 +53,29 @@ const PWAInstallPrompt = () => {
           </div>
           
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1 font-telenor">
-              Install GPStar Trip Planner
-            </h3>
-            <p className="text-xs text-gray-600 dark:text-gray-300 mb-3 font-inter">
-              Add to your home screen for quick access and offline use
-            </p>
+            <TranslatedText 
+              text="Install GPStar Trip Planner"
+              as="h3"
+              className="text-sm font-semibold text-gray-900 dark:text-white mb-1 font-telenor"
+            />
+            <TranslatedText 
+              text="Add to your home screen for quick access and offline use"
+              as="p"
+              className="text-xs text-gray-600 dark:text-gray-300 mb-3 font-inter"
+            />
             
             <div className="flex gap-2">
-              <button
+              <TranslatedButton
                 onClick={handleInstallClick}
+                normalText="Install App"
+                isLoading={false}
                 className="flex-1 bg-gradient-to-r from-[#00B5FB] to-[#3cbef2] hover:from-[#0099d9] hover:to-[#2ba8d9] text-white text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-300 font-inter"
-              >
-                Install App
-              </button>
+              />
               <button
                 onClick={handleDismiss}
                 className="px-3 py-2 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200 font-inter"
               >
-                Not Now
+                <TranslatedText text="Not Now" />
               </button>
             </div>
           </div>

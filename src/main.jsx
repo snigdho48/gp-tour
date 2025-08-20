@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { LanguageProvider } from './contexts/LanguageContext.jsx'
 
 // Theme initialization to avoid FOUC (Flash of Unstyled Content)
 // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -26,6 +27,8 @@ if ('serviceWorker' in navigator) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
   </StrictMode>,
 )
