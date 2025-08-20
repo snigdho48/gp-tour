@@ -9,6 +9,7 @@ export const useTranslation = () => {
 
   // Translate single text
   const translate = useCallback(async (text) => {
+    
     if (!text || currentLanguage === 'en') {
       return text;
     }
@@ -23,12 +24,14 @@ export const useTranslation = () => {
       await new Promise(resolve => setTimeout(resolve, 100));
       
       const translated = await translateText(text, 'en', currentLanguage);
+      
       if (translated && translated !== text) {
         setTranslatedTexts(prev => new Map(prev).set(text, translated));
         return translated;
       }
       return text;
-    } catch {
+    } catch (error) {
+      console.error('useTranslation: Error in translate:', error);
       return text;
     }
   }, [currentLanguage, translatedTexts]);

@@ -144,6 +144,92 @@ const COMMON_TRANSLATIONS = {
     'Budget Allocation': 'বাজেট বরাদ্দ',
     'Planning Your Trip': 'আপনার ট্রিপ পরিকল্পনা করার জন্য',
     'We\'re finding the perfect destinations for you...': 'আমরা আপনার জন্য নিখুঁত গন্তব্য খুঁজছি...',
+    // Trip types
+    'International': 'আন্তর্জাতিক',
+    'Domestic': 'অভ্যন্তরীণ',
+    'Day Trip': 'দিনের ট্রিপ',
+    // Trip descriptions
+    'No stay — day trip': 'থাকার জায়গা নেই—দিনের ট্রিপ',
+    '3★ beachside hotel': '৩★ সৈকতের পাশের হোটেল',
+    'Eco resort': 'ইকো রিসোর্ট',
+    '4★ city hotel': '৪★ শহরের হোটেল',
+    '4★ resort': '৪★ রিসোর্ট',
+    // Highlights
+    'Beach sunset': 'সৈকতের সূর্যাস্ত',
+    'Marine Drive': 'মেরিন ড্রাইভ',
+    'Seafood dinner': 'সামুদ্রিক খাবারের রাতের খাবার',
+    'Tea gardens': 'চা বাগান',
+    'Lawachara forest': 'লাওয়াছড়া বন',
+    'Street food': 'রাস্তার খাবার',
+    'Grand Palace': 'গ্র্যান্ড প্যালেস',
+    'Temple tours': 'মন্দিরের ট্যুর',
+    'Beaches': 'সৈকত',
+    'Heritage sites': 'ঐতিহ্যবাহী স্থান',
+    'Museum': 'জাদুঘর',
+    // Itinerary parts
+    'Morning:': 'সকাল:',
+    'Noon:': 'দুপুর:',
+    'Evening:': 'সন্ধ্যা:',
+    'Day 1:': 'দিন ১:',
+    'Day 2:': 'দিন ২:',
+    'Day 3:': 'দিন ৩:',
+    'Day 4:': 'দিন ৪:',
+    'Day 5:': 'দিন ৫:',
+    'Arrive, Laboni Beach & sunset': 'আগমন, লাবণী সৈকত এবং সূর্যাস্ত',
+    'Inani–Himchari, Marine Drive': 'ইনানী–হিমছড়ি, মেরিন ড্রাইভ',
+    'Local markets & depart': 'স্থানীয় বাজার এবং প্রস্থান',
+    'Travel & tea garden walk': 'ভ্রমণ এবং চা বাগানের হাঁটা',
+    'Lawachara safari & seven-layer tea': 'লাওয়াছড়া সাফারি এবং সাত স্তরের চা',
+    'Chinatown food tour': 'চাইনাটাউন খাবার ট্যুর',
+    'Floating market': 'ভাসমান বাজার',
+    'Shopping & depart': 'কেনাকাটা এবং প্রস্থান',
+    'Tanah Lot sunset': 'তানাহ লট সূর্যাস্ত',
+    'Ubud temples': 'উবুদ মন্দির',
+    'Nusa Dua beach': 'নুসা দুয়া সৈকত',
+    'Waterfalls & market': 'জলপ্রপাত এবং বাজার',
+    'Spa & depart': 'স্পা এবং প্রস্থান',
+    'Travel to Sonargaon': 'সোনারগাঁও ভ্রমণ',
+    'Museum & Panam City walk': 'জাদুঘর এবং পানাম সিটি হাঁটা',
+    'Return to Dhaka': 'ঢাকায় ফিরে আসা',
+
+    
+    // ===== COMPREHENSIVE TRIP DATA TRANSLATIONS =====
+    
+    // Trip Names
+    'Cox\'s Bazar': 'কক্সবাজার',
+    'Sreemangal': 'শ্রীমঙ্গল',
+    'Bangkok, Thailand': 'ব্যাংকক, থাইল্যান্ড',
+    'Bali, Indonesia': 'বালি, ইন্দোনেশিয়া',
+    'Sonargaon & Panam City': 'সোনারগাঁও এবং পানাম সিটি',
+    
+    // Itinerary - Cox's Bazar
+    'Day 1: Arrive, Laboni Beach & sunset': 'দিন ১: আগমন, লাবণী সৈকত এবং সূর্যাস্ত',
+    'Day 2: Inani–Himchari, Marine Drive': 'দিন ২: ইনানী–হিমছড়ি, মেরিন ড্রাইভ',
+    'Day 3: Local markets & depart': 'দিন ৩: স্থানীয় বাজার এবং প্রস্থান',
+    
+    // Itinerary - Sreemangal
+    'Day 1: Travel & tea garden walk': 'দিন ১: ভ্রমণ এবং চা বাগানের হাঁটা',
+    'Day 2: Lawachara safari & seven-layer tea': 'দিন ২: লাওয়াছড়া সাফারি এবং সাত স্তরের চা',
+    
+    // Itinerary - Bangkok
+    'Day 1: Chinatown food tour': 'দিন ১: চাইনাটাউন খাবার ট্যুর',
+    'Day 2: Grand Palace': 'দিন ২: গ্র্যান্ড প্যালেস',
+    'Day 3: Floating market': 'দিন ৩: ভাসমান বাজার',
+    'Day 4: Shopping & depart': 'দিন ৪: কেনাকাটা এবং প্রস্থান',
+    
+    // Itinerary - Bali
+    'Day 1: Tanah Lot sunset': 'দিন ১: তানাহ লট সূর্যাস্ত',
+    'Day 2: Ubud temples': 'দিন ২: উবুদ মন্দির',
+    'Day 3: Nusa Dua beach': 'দিন ৩: নুসা দুয়া সৈকত',
+    'Day 4: Waterfalls & market': 'দিন ৪: জলপ্রপাত এবং বাজার',
+    'Day 5: Spa & depart': 'দিন ৫: স্পা এবং প্রস্থান',
+    
+    // Additional missing itinerary translations
+    'Morning: Travel to Sonargaon': 'সকাল: সোনারগাঁও ভ্রমণ',
+    'Noon: Museum & Panam City walk': 'দুপুর: জাদুঘর এবং পানাম সিটি হাঁটা',
+    'Evening: Return to Dhaka': 'সন্ধ্যা: ঢাকায় ফিরে আসা',
+    
+    // ===== END COMPLETE TRIP DATA TRANSLATIONS =====
   }
 };
 
@@ -163,11 +249,18 @@ export const translateText = async (text, sourceLang, targetLang) => {
 
   // Check common translations first
   const langPair = `${sourceLang}-${targetLang}`;
+  console.log('translateText: Checking langPair:', langPair, 'text:', text);
+  console.log('translateText: COMMON_TRANSLATIONS keys:', Object.keys(COMMON_TRANSLATIONS));
+  console.log('translateText: COMMON_TRANSLATIONS[langPair] keys:', COMMON_TRANSLATIONS[langPair] ? Object.keys(COMMON_TRANSLATIONS[langPair]) : 'undefined');
+  
   if (COMMON_TRANSLATIONS[langPair] && COMMON_TRANSLATIONS[langPair][text]) {
     const commonTranslation = COMMON_TRANSLATIONS[langPair][text];
+    console.log('translateText: Found common translation:', commonTranslation);
     translationCache.set(cacheKey, commonTranslation);
     return commonTranslation;
   }
+  
+  console.log('translateText: No common translation found, will try API');
 
   // Try LibreTranslate first
   let translatedText = await translateWithLibreTranslate(text, sourceLang, targetLang);

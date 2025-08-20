@@ -21,7 +21,8 @@ const TranslatedText = ({
       try {
         const result = await translate(text);
         setTranslatedText(result);
-      } catch {
+      } catch (error) {
+        console.error('TranslatedText: Translation error:', error);
         setTranslatedText(text);
       }
     };
