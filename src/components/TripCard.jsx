@@ -9,12 +9,14 @@ function TripCard({ option, people, onViewDetails }) {
   const breakdown = breakdownBDT(option);
 
   return (
-    <div className='
+    <div
+      className='
       bg-white/90 overflow-visible dark:bg-gray-800/90 backdrop-blur-sm 
       rounded-xl sm:rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 
       transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] hover:z-[99999] 
       h-full flex flex-col group
-    '>
+    '
+    >
       {/* Header - more subtle */}
       <div className='bg-gradient-to-r from-teal-600 to-slate-600 dark:from-slate-700 dark:to-slate-800 p-4 sm:p-6 text-white transition-all duration-500 rounded-t-xl sm:rounded-t-2xl border-gray-200/50 dark:border-gray-700/50'>
         <div className='flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 rounded-t-xl sm:rounded-t-2xl'>
@@ -143,8 +145,6 @@ function TripCard({ option, people, onViewDetails }) {
           </ol>
         </div>
 
-
-
         <button
           onClick={() => setShowBreakdown(!showBreakdown)}
           className='text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-xs sm:text-sm font-medium mb-3 sm:mb-4 transition-all duration-300 cursor-pointer font-inter'
@@ -155,191 +155,205 @@ function TripCard({ option, people, onViewDetails }) {
         </button>
         {/* Budget Allocation with Hover Tooltips */}
         {showBreakdown && (
-        <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md'>
-          <TranslatedText
-            text='Budget Allocation (BDT)'
-            className='font-semibold mb-3 text-xs sm:text-sm text-blue-800 dark:text-blue-200 font-telenor'
-            as='div'
-          />
+          <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md'>
+            <TranslatedText
+              text='Budget Allocation (BDT)'
+              className='font-semibold mb-3 text-xs sm:text-sm text-blue-800 dark:text-blue-200 font-telenor'
+              as='div'
+            />
 
-          {/* Budget Breakdown Bars */}
-          <div className='space-y-3'>
-                                     {/* Flight */}
-            <div className='relative group/flight'>
-              <div className='flex justify-between text-xs sm:text-sm mb-1'>
-                <TranslatedText
-                  text='Flight'
-                  className='text-blue-700 dark:text-blue-300 font-medium'
-                />
-                <span className='font-semibold text-blue-800 dark:text-blue-200'>
-                  {fmtBDT(breakdown.flight)}
-                </span>
-              </div>
-              <div className='w-full bg-blue-200 dark:bg-blue-700 rounded-full h-2 group-hover/flight:bg-blue-300 dark:group-hover/flight:bg-blue-600 transition-all duration-300'>
+            {/* Budget Breakdown Bars */}
+            <div className='space-y-3'>
+              {/* Flight */}
+              <div className='relative group/flight'>
+                <div className='flex justify-between text-xs sm:text-sm mb-1'>
+                  <TranslatedText
+                    text='Flight'
+                    className='text-blue-700 dark:text-blue-300 font-medium'
+                  />
+                  <span className='font-semibold text-blue-800 dark:text-blue-200'>
+                    {fmtBDT(breakdown.flight)}
+                  </span>
+                </div>
+                <div className='w-full bg-blue-200 dark:bg-blue-700 rounded-full h-2 group-hover/flight:bg-blue-300 dark:group-hover/flight:bg-blue-600 transition-all duration-300'>
+                  <div
+                    className='bg-blue-500 h-2 rounded-full transition-all duration-300'
+                    style={{
+                      width: `${(breakdown.flight / breakdown.total) * 100}%`,
+                    }}
+                  ></div>
+                </div>
+                {/* Flight Tooltip */}
                 <div
-                  className='bg-blue-500 h-2 rounded-full transition-all duration-300'
-                  style={{
-                    width: `${(breakdown.flight / breakdown.total) * 100}%`,
-                  }}
-                ></div>
-              </div>
-              {/* Flight Tooltip */}
-              <div className='
+                  className='
                 absolute bottom-full left-0 right-0 mb-2 
                 px-3 py-2 bg-blue-900 text-white text-xs rounded-lg 
                 opacity-0 group-hover/flight:opacity-100 transition-opacity duration-300 
                 pointer-events-none z-[999999] text-center shadow-lg
-              '>
-                <TranslatedText text='International flights typically cost 40-60% of total budget. Domestic flights are 15-25%.' />
-                <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900'></div>
+              '
+                >
+                  <TranslatedText text='International flights typically cost 40-60% of total budget. Domestic flights are 15-25%.' />
+                  <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900'></div>
+                </div>
               </div>
-            </div>
 
-                        {/* Hotel */}
-            <div className='relative group/hotel'>
-              <div className='flex justify-between text-xs sm:text-sm mb-1'>
-                <TranslatedText
-                  text='Hotel'
-                  className='text-green-700 dark:text-green-300 font-medium'
-                />
-                <span className='font-semibold text-green-800 dark:text-green-200'>
-                  {fmtBDT(breakdown.hotel)}
-                </span>
-              </div>
-              <div className='w-full bg-green-200 dark:bg-green-700 rounded-full h-2 group-hover/hotel:bg-green-300 dark:group-hover/hotel:bg-green-600 transition-all duration-300'>
+              {/* Hotel */}
+              <div className='relative group/hotel'>
+                <div className='flex justify-between text-xs sm:text-sm mb-1'>
+                  <TranslatedText
+                    text='Hotel'
+                    className='text-green-700 dark:text-green-300 font-medium'
+                  />
+                  <span className='font-semibold text-green-800 dark:text-green-200'>
+                    {fmtBDT(breakdown.hotel)}
+                  </span>
+                </div>
+                <div className='w-full bg-green-200 dark:bg-green-700 rounded-full h-2 group-hover/hotel:bg-green-300 dark:group-hover/hotel:bg-green-600 transition-all duration-300'>
+                  <div
+                    className='bg-green-500 h-2 rounded-full transition-all duration-300'
+                    style={{
+                      width: `${(breakdown.hotel / breakdown.total) * 100}%`,
+                    }}
+                  ></div>
+                </div>
+                {/* Hotel Tooltip */}
                 <div
-                  className='bg-green-500 h-2 rounded-full transition-all duration-300'
-                  style={{
-                    width: `${(breakdown.hotel / breakdown.total) * 100}%`,
-                  }}
-                ></div>
-              </div>
-               {/* Hotel Tooltip */}
-               <div className='
+                  className='
                  absolute bottom-full left-0 right-0 mb-2 
                  px-3 py-2 bg-green-900 text-white text-xs rounded-lg 
                  opacity-0 group-hover/hotel:opacity-100 transition-opacity duration-300 
                  pointer-events-none z-[999999] text-center shadow-lg
-               '>
-                 <TranslatedText text='Hotel costs vary by destination type. Premium hotels are 30-40%, budget hotels are 20-25% of total.' />
-                 <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-green-900'></div>
-               </div>
-            </div>
+               '
+                >
+                  <TranslatedText text='Hotel costs vary by destination type. Premium hotels are 30-40%, budget hotels are 20-25% of total.' />
+                  <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-green-900'></div>
+                </div>
+              </div>
 
-                        {/* Activities */}
-            <div className='relative group/activities'>
-              <div className='flex justify-between text-xs sm:text-sm mb-1'>
-                <TranslatedText
-                  text='Activities'
-                  className='text-purple-700 dark:text-purple-300 font-medium'
-                />
-                <span className='font-semibold text-purple-800 dark:text-purple-200'>
-                  {fmtBDT(breakdown.activities)}
-                </span>
-              </div>
-              <div className='w-full bg-purple-200 dark:bg-purple-700 rounded-full h-2 group-hover/activities:bg-purple-300 dark:group-hover/activities:bg-purple-600 transition-all duration-300'>
+              {/* Activities */}
+              <div className='relative group/activities'>
+                <div className='flex justify-between text-xs sm:text-sm mb-1'>
+                  <TranslatedText
+                    text='Activities'
+                    className='text-purple-700 dark:text-purple-300 font-medium'
+                  />
+                  <span className='font-semibold text-purple-800 dark:text-purple-200'>
+                    {fmtBDT(breakdown.activities)}
+                  </span>
+                </div>
+                <div className='w-full bg-purple-200 dark:bg-purple-700 rounded-full h-2 group-hover/activities:bg-purple-300 dark:group-hover/activities:bg-purple-600 transition-all duration-300'>
+                  <div
+                    className='bg-purple-500 h-2 rounded-full transition-all duration-300'
+                    style={{
+                      width: `${
+                        (breakdown.activities / breakdown.total) * 100
+                      }%`,
+                    }}
+                  ></div>
+                </div>
+                {/* Activities Tooltip */}
                 <div
-                  className='bg-purple-500 h-2 rounded-full transition-all duration-300'
-                  style={{
-                    width: `${(breakdown.activities / breakdown.total) * 100}%`,
-                  }}
-                ></div>
-              </div>
-               {/* Activities Tooltip */}
-               <div className='
+                  className='
                  absolute bottom-full left-0 right-0 mb-2 
                  px-3 py-2 bg-purple-900 text-white text-xs rounded-lg 
                  opacity-0 group-hover/activities:opacity-100 transition-opacity duration-300 
                  pointer-events-none z-[999999] text-center shadow-lg
-               '>
-                 <TranslatedText text='Sightseeing, tours, and experiences. Usually 15-20% for cultural trips, 10-15% for beach trips.' />
-                 <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900'></div>
-               </div>
-            </div>
+               '
+                >
+                  <TranslatedText text='Sightseeing, tours, and experiences. Usually 15-20% for cultural trips, 10-15% for beach trips.' />
+                  <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900'></div>
+                </div>
+              </div>
 
-                        {/* Transport */}
-            <div className='relative group/transport'>
-              <div className='flex justify-between text-xs sm:text-sm mb-1'>
-                <TranslatedText
-                  text='Local Transport'
-                  className='text-orange-700 dark:text-orange-300 font-medium'
-                />
-                <span className='font-semibold text-orange-800 dark:text-orange-200'>
-                  {fmtBDT(breakdown.transport)}
-                </span>
-              </div>
-              <div className='w-full bg-orange-200 dark:bg-orange-700 rounded-full h-2 group-hover/transport:bg-orange-300 dark:group-hover/transport:bg-orange-600 transition-all duration-300'>
+              {/* Transport */}
+              <div className='relative group/transport'>
+                <div className='flex justify-between text-xs sm:text-sm mb-1'>
+                  <TranslatedText
+                    text='Local Transport'
+                    className='text-orange-700 dark:text-orange-300 font-medium'
+                  />
+                  <span className='font-semibold text-orange-800 dark:text-orange-200'>
+                    {fmtBDT(breakdown.transport)}
+                  </span>
+                </div>
+                <div className='w-full bg-orange-200 dark:bg-orange-700 rounded-full h-2 group-hover/transport:bg-orange-300 dark:group-hover/transport:bg-orange-600 transition-all duration-300'>
+                  <div
+                    className='bg-orange-500 h-2 rounded-full transition-all duration-300'
+                    style={{
+                      width: `${
+                        (breakdown.transport / breakdown.total) * 100
+                      }%`,
+                    }}
+                  ></div>
+                </div>
+                {/* Transport Tooltip */}
                 <div
-                  className='bg-orange-500 h-2 rounded-full transition-all duration-300'
-                  style={{
-                    width: `${(breakdown.transport / breakdown.total) * 100}%`,
-                  }}
-                ></div>
-              </div>
-               {/* Transport Tooltip */}
-               <div className='
+                  className='
                  absolute bottom-full left-0 right-0 mb-2 
                  px-3 py-2 bg-orange-900 text-white text-xs rounded-lg 
                  opacity-0 group-hover/transport:opacity-100 transition-opacity duration-300 
                  pointer-events-none z-[999999] text-center shadow-lg
-               '>
-                 <TranslatedText text='Local transportation, taxis, and transfers. Typically 8-12% of total budget for convenience.' />
-                 <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-orange-900'></div>
-               </div>
-            </div>
+               '
+                >
+                  <TranslatedText text='Local transportation, taxis, and transfers. Typically 8-12% of total budget for convenience.' />
+                  <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-orange-900'></div>
+                </div>
+              </div>
 
-            {/* Contingency */}
-            <div className='relative group/contingency'>
-              <div className='flex justify-between text-xs sm:text-sm mb-1'>
-                <TranslatedText
-                  text='Contingency (5%)'
-                  className='text-red-700 dark:text-red-300 font-medium'
-                />
-                <span className='font-semibold text-red-800 dark:text-red-200'>
-                  {fmtBDT(breakdown.contingency)}
-                </span>
-              </div>
-              <div className='w-full bg-red-200 dark:bg-red-700 rounded-full h-2 group-hover/contingency:bg-red-300 dark:group-hover/contingency:bg-red-600 transition-all duration-300'>
+              {/* Contingency */}
+              <div className='relative group/contingency'>
+                <div className='flex justify-between text-xs sm:text-sm mb-1'>
+                  <TranslatedText
+                    text='Contingency (5%)'
+                    className='text-red-700 dark:text-red-300 font-medium'
+                  />
+                  <span className='font-semibold text-red-800 dark:text-red-200'>
+                    {fmtBDT(breakdown.contingency)}
+                  </span>
+                </div>
+                <div className='w-full bg-red-200 dark:bg-red-700 rounded-full h-2 group-hover/contingency:bg-red-300 dark:group-hover/contingency:bg-red-600 transition-all duration-300'>
+                  <div
+                    className='bg-red-500 h-2 rounded-full transition-all duration-300'
+                    style={{
+                      width: `${
+                        (breakdown.contingency / breakdown.total) * 100
+                      }%`,
+                    }}
+                  ></div>
+                </div>
+                {/* Contingency Tooltip */}
                 <div
-                  className='bg-red-500 h-2 rounded-full transition-all duration-300'
-                  style={{
-                    width: `${
-                      (breakdown.contingency / breakdown.total) * 100
-                    }%`,
-                  }}
-                ></div>
-              </div>
-                             {/* Contingency Tooltip */}
-               <div className='
+                  className='
                  absolute bottom-full left-0 right-0 mb-2 
                  px-3 py-2 bg-red-900 text-white text-xs rounded-lg 
                  opacity-0 group-hover/contingency:opacity-100 transition-opacity duration-300 
                  pointer-events-none z-[999999] text-center shadow-lg
-               '>
-                 <TranslatedText text='5% buffer for unexpected expenses, currency fluctuations, or last-minute changes. Essential for stress-free travel.' />
-                 <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-red-900'></div>
-               </div>
+               '
+                >
+                  <TranslatedText text='5% buffer for unexpected expenses, currency fluctuations, or last-minute changes. Essential for stress-free travel.' />
+                  <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-red-900'></div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* Total Summary */}
-          <div className='mt-4 pt-3 border-t border-blue-200 dark:border-blue-700'>
-            <div className='flex justify-between items-center'>
-              <TranslatedText
-                text='Total Budget:'
-                className='text-lg font-bold text-blue-800 dark:text-blue-200'
-              />
-              <span className='text-xl font-bold text-blue-900 dark:text-blue-100'>
-                {fmtBDT(breakdown.total)}
-              </span>
-            </div>
-            <div className='text-center mt-2'>
-              <TranslatedText
-                text={`Per person: ${fmtBDT(
-                  Math.round(breakdown.total / people)
-                )}`}
-                className='text-sm text-blue-600 dark:text-blue-300 font-medium'
-              />
+            {/* Total Summary */}
+            <div className='mt-4 pt-3 border-t border-blue-200 dark:border-blue-700'>
+              <div className='flex justify-between items-center'>
+                <TranslatedText
+                  text='Total Budget:'
+                  className='text-lg font-bold text-blue-800 dark:text-blue-200'
+                />
+                <span className='text-xl font-bold text-blue-900 dark:text-blue-100'>
+                  {fmtBDT(breakdown.total)}
+                </span>
+              </div>
+              <div className='text-center mt-2'>
+                <TranslatedText
+                  text={`Per person: ${fmtBDT(
+                    Math.round(breakdown.total / people)
+                  )}`}
+                  className='text-sm text-blue-600 dark:text-blue-300 font-medium'
+                />
               </div>
             </div>
           </div>
@@ -367,7 +381,21 @@ function TripCard({ option, people, onViewDetails }) {
             </div>
           </div>
         )}
-
+                 {/* Roaming Suggestion Section - Only for International trips */}
+         {option.type === "International" && (
+           <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md'>
+             <TranslatedText
+               text='Stay Connected with GPStar Roaming'
+               className='font-semibold mb-3 text-xs sm:text-sm text-blue-800 dark:text-blue-200 font-telenor break-words leading-tight'
+               as='div'
+             />
+             <TranslatedText
+               text='Get GPStar roaming packages for your trip to stay connected with family and share your travel moments instantly!'
+               className='text-xs text-blue-600 dark:text-blue-400 break-words leading-tight'
+               as='p'
+             />
+           </div>
+         )}
         {/* Button - positioned at bottom */}
         <div className='mt-auto pt-3 sm:pt-4'>
           <TranslatedButton
