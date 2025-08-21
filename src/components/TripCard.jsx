@@ -3,6 +3,7 @@ import { fmtBDT } from '../constants/tripData.js';
 import { breakdownBDT } from '../utils/calculations.js';
 import TranslatedText from './TranslatedText';
 import TranslatedButton from './TranslatedButton';
+import TripDownloadOptions from './TripDownloadOptions.jsx';
 
 function TripCard({ option, people, onViewDetails }) {
   const [showBreakdown, setShowBreakdown] = useState(false);
@@ -37,11 +38,7 @@ function TripCard({ option, people, onViewDetails }) {
             as='span'
           />
         </div>
-        <TranslatedText
-          text={option.stay}
-          className='text-teal-100 dark:text-slate-200 text-xs sm:text-sm opacity-90 transition-all duration-300 font-inter break-words leading-tight'
-          as='p'
-        />
+
         {option.nights > 0 && (
           <span className='text-teal-200 dark:text-slate-300 text-xs sm:text-sm transition-all duration-300 font-inter'>
             {option.nights}{" "}
@@ -95,9 +92,14 @@ function TripCard({ option, people, onViewDetails }) {
             as='div'
           />
           <ul className='list-disc list-inside space-y-1 text-xs sm:text-sm font-inter'>
+            <TranslatedText
+              text={option.stay}
+              className='text-teal-100 dark:text-slate-200 text-xs sm:text-sm opacity-90 transition-all duration-300 font-inter break-words leading-tight'
+              as='li'
+            />
             {option.highlights.map((h, i) => (
               <TranslatedText
-                key={i}
+                key={i + 1}
                 text={h}
                 className='text-gray-600 dark:text-gray-300 transition-all duration-200 break-words leading-tight'
                 as='li'
@@ -371,29 +373,28 @@ function TripCard({ option, people, onViewDetails }) {
                 as='div'
               />
               <div className='text-xs sm:text-sm text-green-600 dark:text-green-400 font-inter break-words leading-tight'>
-                <TranslatedText text='Flight' />:{" "}
-                {fmtBDT(breakdown.savingsFlight)} |{" "}
-                <TranslatedText text='Hotel' />:{" "}
-                {fmtBDT(breakdown.savingsHotel)}
+                <TranslatedText text='Save Upto 50% on your trip' />
+             
+              
               </div>
             </div>
           </div>
         )}
-                 {/* Roaming Suggestion Section - Only for International trips */}
-         {option.type === "International" && (
-           <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md'>
-             <TranslatedText
-               text='Stay Connected with GPStar Roaming'
-               className='font-semibold mb-3 text-xs sm:text-sm text-blue-800 dark:text-blue-200 font-telenor break-words leading-tight'
-               as='div'
-             />
-             <TranslatedText
-               text='Get GPStar roaming packages for your trip to stay connected with family and share your travel moments instantly!'
-               className='text-xs text-blue-600 dark:text-blue-400 break-words leading-tight'
-               as='p'
-             />
-           </div>
-         )}
+        {/* Roaming Suggestion Section - Only for International trips */}
+        {option.type === "International" && (
+          <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md'>
+            <TranslatedText
+              text='Stay Connected with GPStar Roaming'
+              className='font-semibold mb-3 text-xs sm:text-sm text-blue-800 dark:text-blue-200 font-telenor break-words leading-tight'
+              as='div'
+            />
+            <TranslatedText
+              text='Get GPStar roaming packages for your trip to stay connected with family and share your travel moments instantly!'
+              className='text-xs text-blue-600 dark:text-blue-400 break-words leading-tight'
+              as='p'
+            />
+          </div>
+        )}
         {/* Button - positioned at bottom */}
         <div className='mt-auto pt-3 sm:pt-4'>
           <TranslatedButton
@@ -402,6 +403,9 @@ function TripCard({ option, people, onViewDetails }) {
             isLoading={false}
             className='w-full bg-gradient-to-r from-teal-600 to-slate-600 hover:from-teal-700 hover:to-slate-700 dark:from-slate-600 dark:to-slate-700 dark:hover:from-slate-700 dark:hover:to-slate-800 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 cursor-pointer text-xs sm:text-sm font-inter'
           />
+        </div>
+        <div className='mt-4'>
+          <TripDownloadOptions option={option} people={people} />
         </div>
       </div>
     </div>

@@ -116,8 +116,8 @@ const COMMON_TRANSLATIONS = {
     "Local Transport": "স্থানীয় পরিবহন",
     "Contingency (5%)": "অনাকাঙ্ক্ষিত (৫%)",
     "Total Budget:": "মোট বাজেট:",
-         "Per person:": "প্রতি ব্যক্তি:",
-     "Per person": "প্রতি ব্যক্তি",
+    "Per person:": "প্রতি ব্যক্তি:",
+    "Per person": "প্রতি ব্যক্তি",
     "Show Detailed Breakdown": "বিস্তারিত বিভাজন দেখুন",
     "Hide Detailed Breakdown": "বিস্তারিত বিভাজন লুকান",
     "International flights typically cost 40-60% of total budget. Domestic flights are 15-25%.":
@@ -272,10 +272,11 @@ const COMMON_TRANSLATIONS = {
     // ===== ROAMING SUGGESTION TRANSLATIONS =====
 
     // Roaming Suggestion Section
-    "Stay Connected with GPStar Roaming": "সংযুক্ত থাকুন জিপি স্টার রোমিংয়ের সাথে",
+    "Stay Connected with GPStar Roaming":
+      "সংযুক্ত থাকুন জিপি স্টার রোমিংয়ের সাথে",
     "Get GPStar roaming packages for your trip to stay connected with family and share your travel moments instantly!":
       "আপনার ভ্রমণের জন্য জিপি স্টার রোমিং প্যাকেজ পান এবং আপনার ভ্রমণের সময় সম্প্রতি পরিবারের সাথে সংযুক্ত থাকুন এবং আপনার ভ্রমণের মুহূর্ত শেয়ার করুন!",
-
+    "Save Upto 50% on your trip": "আপনার ট্রিপে ৫০% পর্যন্ত সাশ্রয় করুন",
     // ===== END ROAMING SUGGESTION TRANSLATIONS =====
 
     // ===== END GPSTAR OFFER CATEGORIES TRANSLATIONS =====
