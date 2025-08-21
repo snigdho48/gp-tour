@@ -10,7 +10,7 @@ function TermsAndConditions({ isOpen, onClose }) {
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white font-telenor">
-              Terms & Conditions
+              <TranslatedText text="Terms & Conditions" />
             </h2>
             <button
               onClick={onClose}
@@ -24,36 +24,46 @@ function TermsAndConditions({ isOpen, onClose }) {
           
           <div className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed space-y-4">
             <p>
-              Welcome to GPStar Trip Planner. By using our service, you agree to the following terms and conditions:
+              <TranslatedText text="Welcome to GPStar Trip Planner. By using our service, you agree to the following terms and conditions:" />
             </p>
             
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">1. Service Usage</h3>
-              <p>GPStar Trip Planner provides travel planning and budget calculation services. All information provided is for planning purposes only.</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                <TranslatedText text="1. Service Usage" />
+              </h3>
+              <p><TranslatedText text="GPStar Trip Planner provides travel planning and budget calculation services. All information provided is for planning purposes only." /></p>
             </div>
             
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">2. Accuracy of Information</h3>
-              <p>While we strive for accuracy, travel costs and information may vary. Please verify all details before making travel arrangements.</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                <TranslatedText text="2. Accuracy of Information" />
+              </h3>
+              <p><TranslatedText text="While we strive for accuracy, travel costs and information may vary. Please verify all details before making travel arrangements." /></p>
             </div>
             
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">3. User Responsibility</h3>
-              <p>Users are responsible for their own travel decisions and arrangements. GPStar is not liable for any travel-related issues.</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                <TranslatedText text="3. User Responsibility" />
+              </h3>
+              <p><TranslatedText text="Users are responsible for their own travel decisions and arrangements. GPStar is not liable for any travel-related issues." /></p>
             </div>
             
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">4. Privacy</h3>
-              <p>Your personal information and travel preferences are kept confidential and used only for trip planning purposes.</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                <TranslatedText text="4. Privacy" />
+              </h3>
+              <p><TranslatedText text="Your personal information and travel preferences are kept confidential and used only for trip planning purposes." /></p>
             </div>
             
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">5. Service Modifications</h3>
-              <p>GPStar reserves the right to modify or discontinue services at any time without prior notice.</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                <TranslatedText text="5. Service Modifications" />
+              </h3>
+              <p><TranslatedText text="GPStar reserves the right to modify or discontinue services at any time without prior notice." /></p>
             </div>
             
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-6">
-              Last updated: {new Date().toLocaleDateString()}
+              <TranslatedText text="Last updated:" /> {new Date().toLocaleDateString()}
             </p>
           </div>
         </div>

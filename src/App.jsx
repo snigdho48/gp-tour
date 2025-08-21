@@ -186,7 +186,7 @@ function App() {
             onClick={() => setShowTerms(true)}
             className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
           >
-            Terms & Conditions
+            <TranslatedText text="Terms & Conditions" />
           </button>
           <a
             href="#how-to-be-gpstar"
@@ -196,7 +196,7 @@ function App() {
             }}
             className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
           >
-            How to be a GPStar
+            <TranslatedText text="How to be a GPStar" />
           </a>
         </div>
       </div>
