@@ -3,5 +3,7 @@ export { default as TripCard } from './TripCard.jsx';
 export { default as TripDownloadOptions } from './TripDownloadOptions.jsx';
 export { default as ErrorMessage } from './ErrorMessage.jsx';
 export { default as EmptyState } from './EmptyState.jsx';
+export { default as TermsAndConditions } from './TermsAndConditions.jsx';
+export { default as HowToBeGPStar } from './HowToBeGPStar.jsx';
 export { default as ThemeToggle } from './ThemeToggle.jsx';
 export { default as GPStarOfferCategories } from './GPStarOfferCategories.jsx';

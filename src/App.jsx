@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 // Import components
-import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle, GPStarOfferCategories } from './components';
+import { BudgetForm, TripCard, ErrorMessage, EmptyState, ThemeToggle, GPStarOfferCategories, TermsAndConditions, HowToBeGPStar } from './components';
 import TranslatedText from './components/TranslatedText';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 import LanguageToggle from './components/LanguageToggle';
@@ -83,6 +83,9 @@ function App() {
     setExitingSuggestions([]);
     setError('');
   };
+
+  const [showTerms, setShowTerms] = useState(false);
+  const [showHowToBeGPStar, setShowHowToBeGPStar] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
@@ -176,6 +179,28 @@ function App() {
         {suggestions.length > 0 && <GPStarOfferCategories />}
       </div>
       
+      {/* Footer Links */}
+      <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center">
+          <button
+            onClick={() => setShowTerms(true)}
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
+          >
+            Terms & Conditions
+          </button>
+          <a
+            href="#how-to-be-gpstar"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowHowToBeGPStar(true);
+            }}
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
+          >
+            How to be a GPStar
+          </a>
+        </div>
+      </div>
+      
       {/* PWA Install Prompt */}
       <PWAInstallPrompt />
       
@@ -185,6 +210,12 @@ function App() {
           <LoadingOverlay />
        
       )}
+      
+      {/* Terms & Conditions Popup */}
+      <TermsAndConditions isOpen={showTerms} onClose={() => setShowTerms(false)} />
+      
+      {/* How to be a GPStar Popup */}
+      <HowToBeGPStar isOpen={showHowToBeGPStar} onClose={() => setShowHowToBeGPStar(false)} />
     </div>
   );
 }
