@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../assets/logo.png';
 import TranslatedText from './TranslatedText';
 import TranslatedButton from './TranslatedButton';
 import TranslatedInput from './TranslatedInput';
 
-function BudgetForm({ budgetBDT, setBudgetBDT, people, setPeople, onGenerate, isLoading }) {
+function BudgetForm({ budgetBDT, setBudgetBDT, people, setPeople, onGenerate, isLoading, suggestions, clearSuggestions }) {
+  const [showForm, setShowForm] = useState(true);
+
+  // Hide form when suggestions are generated
+  useEffect(() => {
+    if (suggestions && suggestions.length > 0) {
+      setShowForm(false);
+    }
+  }, [suggestions]);
+
+  // Show form when regenerating
+  const handleRegenerate = () => {
+    setShowForm(true);
+    // Clear suggestions to hide all trip cards
+    if (clearSuggestions) {
+      clearSuggestions();
+    }
+  };
+
+  if (!showForm) {
+    return (
+      <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-[60]">
+        <TranslatedButton
+          onClick={handleRegenerate}
+          normalText='Regenerate'
+          isLoading={isLoading}
+          className='bg-gradient-to-r from-teal-600 to-slate-600 hover:from-teal-700 hover:to-slate-700 dark:from-blue-600 dark:to-indigo-600 dark:hover:from-blue-700 dark:hover:to-indigo-700 text-white font-semibold py-3 px-4 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer text-sm font-inter min-w-[120px] sm:min-w-[140px]'
+        />
+      </div>
+    );
+  }
+
   return (
     <div className='animate-fade-in bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50 mb-6 sm:mb-8 hover:shadow-2xl transition-all duration-500'>
       <div className='flex flex-col sm:flex-row items-center justify-center mb-3 sm:mb-4 gap-2 sm:gap-3'>

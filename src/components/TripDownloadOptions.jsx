@@ -99,9 +99,7 @@ function TripDownloadOptions({ option, people }) {
     // Tagline
 
     // Decorative header elements
-    ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-    ctx.fillRect(0, 0, canvas.width, 5);
-    ctx.fillRect(0, 145, canvas.width, 5);
+
 
     // Title
     ctx.fillStyle = "#ffffff";
@@ -505,10 +503,6 @@ function TripDownloadOptions({ option, people }) {
 
           // Tagline
 
-          // Decorative header elements
-          ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-          ctx.fillRect(0, 0, canvas.width, 5);
-          ctx.fillRect(0, 145, canvas.width, 5);
 
           // Title
           ctx.fillStyle = "#ffffff";
