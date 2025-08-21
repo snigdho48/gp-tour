@@ -88,7 +88,7 @@ function App() {
   const [showHowToBeGPStar, setShowHowToBeGPStar] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col">
              {/* Theme Toggle Button */}
        <div className="fixed top-4 right-4 z-10 sm:top-8">
          <ThemeToggle />
@@ -99,7 +99,7 @@ function App() {
          <LanguageToggle />
        </div>
       
-      <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl">
+      <div className="flex-1 container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full">
         <BudgetForm
           budgetBDT={budgetBDT}
           setBudgetBDT={setBudgetBDT}
@@ -118,11 +118,11 @@ function App() {
          )}
         
         {/* Results Container - maintains consistent height */}
-        <div className="relative min-h-[600px] w-full">
+        <div className="relative h-auto w-full">
           
           {/* Exiting Cards - fade out one by one with absolute positioning */}
           {exitingSuggestions.length > 0 && (
-            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8">
+            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 max-w-full">
               {exitingSuggestions.map((opt, idx) => (
                 <div
                   key={`exiting-${opt.name}-${idx}`}
@@ -146,7 +146,7 @@ function App() {
           {suggestions.length > 0 && (
             <div 
               key={`grid-${transitionKey}`}
-              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-3 lg:gap-4 xl:gap-6"
+              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-3 lg:gap-4 xl:gap-6 max-w-full"
             >
               {suggestions.map((opt, idx) => (
                 <div
@@ -179,8 +179,8 @@ function App() {
         {suggestions.length > 0 && <GPStarOfferCategories />}
       </div>
       
-      {/* Footer Links */}
-      <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl">
+      {/* Footer Links - Fixed at bottom */}
+      <div className="mt-auto container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl w-full">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center">
           <button
             onClick={() => setShowTerms(true)}
