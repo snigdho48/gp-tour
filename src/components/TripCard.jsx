@@ -7,6 +7,7 @@ import TripDownloadOptions from './TripDownloadOptions.jsx';
 
 function TripCard({ option, people, onViewDetails }) {
   const [showBreakdown, setShowBreakdown] = useState(false);
+  const [showItinerary, setShowItinerary] = useState(false);
   const breakdown = breakdownBDT(option);
 
   return (
@@ -127,25 +128,33 @@ function TripCard({ option, people, onViewDetails }) {
             </>
           )}
         </div>
-
-        {/* Itinerary section */}
-        <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-300 shadow-md'>
+        <button
+          onClick={() => setShowItinerary(!showItinerary)}
+          className='text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-xs sm:text-sm font-medium mb-3 sm:mb-4 transition-all duration-300 cursor-pointer font-inter'
+        >
           <TranslatedText
-            text='Sample Itinerary'
-            className='font-semibold mb-2 sm:mb-3 text-xs sm:text-sm text-gray-800 dark:text-gray-200 font-telenor'
-            as='div'
+            text={showItinerary ? "Hide Itinerary" : "Show Itinerary"}
           />
-          <ol className='list-decimal list-inside space-y-1 text-xs sm:text-sm font-inter'>
-            {option.itinerary.map((d, i) => (
-              <TranslatedText
-                key={i}
-                text={d}
-                className='text-gray-600 dark:text-gray-300 transition-all duration-200 break-words leading-tight'
-                as='li'
-              />
-            ))}
-          </ol>
-        </div>
+        </button>
+        {showItinerary && (
+          <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-600 transition-all duration-300 shadow-md'>
+            <TranslatedText
+              text='Sample Itinerary'
+              className='font-semibold mb-2 sm:mb-3 text-xs sm:text-sm text-gray-800 dark:text-gray-200 font-telenor'
+              as='div'
+            />
+            <ol className='list-decimal list-inside space-y-1 text-xs sm:text-sm font-inter'>
+              {option.itinerary.map((d, i) => (
+                <TranslatedText
+                  key={i}
+                  text={d}
+                  className='text-gray-600 dark:text-gray-300 transition-all duration-200 break-words leading-tight'
+                  as='li'
+                />
+              ))}
+            </ol>
+          </div>
+        )}
 
         <button
           onClick={() => setShowBreakdown(!showBreakdown)}
@@ -363,23 +372,27 @@ function TripCard({ option, people, onViewDetails }) {
 
         {/* Detailed Cost Breakdown (Collapsible) */}
 
-        {/* Savings info - more subtle */}
-        {(breakdown.savingsFlight > 0 || breakdown.savingsHotel > 0) && (
-          <div className='mb-4 sm:mb-6 p-2 sm:p-3 bg-green-50 dark:bg-green-900/20 rounded-lg sm:rounded-xl border border-green-200 dark:border-green-800 transition-all duration-300 shadow-md'>
-            <div className='text-center'>
-              <TranslatedText
-                text='GPStar Savings!'
-                className='text-base sm:text-lg font-bold text-green-700 dark:text-green-400 font-telenor'
-                as='div'
-              />
-              <div className='text-xs sm:text-sm text-green-600 dark:text-green-400 font-inter break-words leading-tight'>
-                <TranslatedText text='Save Upto 50% on your trip' />
-             
-              
-              </div>
+        {/* GPStar Savings - Specific by trip type */}
+        <div className='mb-4 sm:mb-6 p-2 sm:p-3 bg-green-50 dark:bg-green-900/20 rounded-lg sm:rounded-xl border border-green-200 dark:border-green-800 transition-all duration-300 shadow-md'>
+          <div className='text-center'>
+            <TranslatedText
+              text='GPStar Savings!'
+              className='text-base sm:text-lg font-bold text-green-700 dark:text-green-400 font-telenor'
+              as='div'
+            />
+            <div className='text-xs sm:text-sm text-green-600 dark:text-green-400 font-inter break-words leading-tight'>
+              {option.type === "International" && (
+                <TranslatedText text='Save 20% on flight tickets with GPStar' />
+              )}{" "}
+              {option.type === "Domestic" && (
+                <TranslatedText text='Save 50% on hotels' />
+              )}{" "}
+              {(option.type === "Domestic" || option.type === "Day Trip") && (
+                <TranslatedText text='Save 15% on car booking' />
+              )}{" "}
             </div>
           </div>
-        )}
+        </div>
         {/* Roaming Suggestion Section - Only for International trips */}
         {option.type === "International" && (
           <div className='mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800 transition-all duration-300 shadow-md'>

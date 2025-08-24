@@ -28,3 +28,5 @@ app.listen(PORT, () => {
   console.log(`📁 Serving files from: ${path.join(__dirname, 'dist')}`);
   console.log(`🔧 MIME types properly configured for JavaScript modules`);
 });
+
+

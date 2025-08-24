@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage.js';
+import 'flag-icons/css/flag-icons.min.css';
 
 const LanguageToggle = () => {
   const { currentLanguage, changeLanguage } = useLanguage();
   const [isChanging, setIsChanging] = useState(false);
   
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'bn', name: 'বাংলা', flag: '🇧🇩' }
+    { 
+      code: 'en', 
+      name: 'English',
+      flag: 'us'
+    },
+    { 
+      code: 'bn', 
+      name: 'বাংলা',
+      flag: 'bd'
+    }
   ];
 
   const handleLanguageChange = (langCode) => {
@@ -32,14 +41,14 @@ const LanguageToggle = () => {
             key={lang.code}
             onClick={() => handleLanguageChange(lang.code)}
             disabled={isChanging}
-            className={`px-1.5 py-1.5 sm:px-2 sm:py-1 rounded-md text-xs sm:text-sm font-medium transition-all duration-200 min-w-[36px] sm:min-w-0 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`px-1.5 py-1.5 sm:px-2 sm:py-1 flex flex-row rounded-md text-xs sm:text-sm font-medium transition-all duration-200 min-w-[36px] sm:min-w-0 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${
               currentLanguage === lang.code
                 ? 'bg-blue-500 text-white shadow-md'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
-            <span className="mr-0.5 sm:mr-1">{lang.flag}</span>
-            <span className="hidden sm:inline break-words leading-tight">{lang.name}</span>
+            <span className={`mr-1 fi fi-${lang.flag} text-base`} title={lang.name}></span>
+            <span className="break-words leading-tight">{lang.name}</span>
             {isChanging && currentLanguage === lang.code && (
               <div className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 border-2 border-white border-t-transparent rounded-full animate-spin ml-0.5 sm:ml-1"></div>
             )}
