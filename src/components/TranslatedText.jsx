@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from '../hooks/useTranslation.js';
+import React from 'react';
 
 /**
- * A component that automatically translates its text content
+ * A component that displays text (translation functionality removed)
  */
 const TranslatedText = ({ 
   text, 
@@ -11,31 +10,14 @@ const TranslatedText = ({
   children,
   ...props 
 }) => {
-  const { translate } = useTranslation();
-  const [translatedText, setTranslatedText] = useState(text);
-
-  useEffect(() => {
-    const translateText = async () => {
-      if (!text) return;
-      
-      try {
-        const result = await translate(text);
-        setTranslatedText(result);
-      } catch (error) {
-        console.error('TranslatedText: Translation error:', error);
-        setTranslatedText(text);
-      }
-    };
-
-    translateText();
-  }, [text, translate]);
+  // Simply return the text as-is without translation
+  const displayText = text || children;
 
   // Use React.createElement for dynamic element type
   return React.createElement(
     as,
-
     { className, ...props, style: { fontFamily: "TelenorEvolution" } },
-    translatedText || children
+    displayText
   );
 };
 

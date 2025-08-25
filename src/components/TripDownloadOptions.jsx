@@ -6,8 +6,8 @@ import jsPDF from 'jspdf';
 import logo from '../assets/logo.png';
 
 
-function TripDownloadOptions({ option, people }) {
-  const breakdown = breakdownBDT(option);
+function TripDownloadOptions({ trip, people }) {
+  const breakdown = breakdownBDT(trip);
 
   const downloadTripImage = () => {
     // Create canvas for image generation
@@ -110,17 +110,17 @@ function TripDownloadOptions({ option, people }) {
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 36px TelenorEvolution, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText(option.name.toUpperCase(), canvas.width / 2, 120);
+      ctx.fillText(trip.name.toUpperCase(), canvas.width / 2, 120);
 
       // Subtitle
       ctx.font = "24px TelenorEvolution, sans-serif";
-      ctx.fillText(`${option.type} Trip`, canvas.width / 2, 155);
+      ctx.fillText(`${trip.type} Trip`, canvas.width / 2, 155);
 
       // Stay info
       ctx.font = "18px TelenorEvolution, sans-serif";
       ctx.fillText(
-        `${option.nights} ${option.nights > 1 ? "nights" : "night"} • ${
-          option.stay
+        `${trip.nights} ${trip.nights > 1 ? "nights" : "night"} • ${
+          trip.stay
         }`,
         canvas.width / 2,
         190
@@ -149,7 +149,7 @@ function TripDownloadOptions({ option, people }) {
 
       // Budget amounts
       ctx.font = "bold 32px Arial, sans-serif";
-      ctx.fillText(fmtBDT(breakdown.total), canvas.width / 2, yPosition + 70);
+      ctx.fillText(fmtBDT(Math.round(breakdown.total)), canvas.width / 2, yPosition + 70);
 
       ctx.font = "20px Arial, sans-serif";
       ctx.fillText(
@@ -242,7 +242,7 @@ function TripDownloadOptions({ option, people }) {
       ctx.font = '18px Arial, sans-serif';
       ctx.textAlign = 'left';
       
-      option.highlights.forEach((highlight, index) => {
+      trip.highlights.forEach((highlight, index) => {
         if (index < 4) {
           const y = yPosition + 60 + (index * 25);
           ctx.fillStyle = '#3b82f6';
@@ -255,7 +255,7 @@ function TripDownloadOptions({ option, people }) {
       yPosition += 170;
       
       // GPStar Perks Section (if available)
-      if (option.gpstarOffers?.extras) {
+      if (trip.gpstarOffers?.extras) {
         ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
         ctx.shadowBlur = 10;
         ctx.shadowOffsetX = 0;
@@ -277,7 +277,7 @@ function TripDownloadOptions({ option, people }) {
         ctx.font = '18px Arial, sans-serif';
         ctx.textAlign = 'left';
         
-        option.gpstarOffers.extras.forEach((perk, index) => {
+        trip.gpstarOffers.extras.forEach((perk, index) => {
           if (index < 3) {
             const y = yPosition + 60 + (index * 25);
             ctx.fillStyle = '#10b981';
@@ -312,7 +312,7 @@ function TripDownloadOptions({ option, people }) {
       ctx.font = '18px Arial, sans-serif';
       ctx.textAlign = 'left';
       
-      option.itinerary.forEach((day, index) => {
+      trip.itinerary.forEach((day, index) => {
         if (index < 6) {
           const y = yPosition + 60 + (index * 25);
           ctx.fillStyle = '#8b5cf6';
@@ -325,7 +325,7 @@ function TripDownloadOptions({ option, people }) {
       yPosition += 200;
       
       // Roaming Suggestion (for international trips)
-      if (option.type === "International") {
+      if (trip.type === "International") {
         ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
         ctx.shadowBlur = 10;
         ctx.shadowOffsetX = 0;
@@ -370,7 +370,7 @@ function TripDownloadOptions({ option, people }) {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `${option.name.replace(/\s+/g, "_")}_Trip_Details.png`;
+        a.download = `${trip.name.replace(/\s+/g, "_")}_Trip_Details.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -473,17 +473,17 @@ function TripDownloadOptions({ option, people }) {
         ctx.fillStyle = "#ffffff";
         ctx.font = "bold 36px TelenorEvolution, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText(option.name.toUpperCase(), canvas.width / 2, 120);
+        ctx.fillText(trip.name.toUpperCase(), canvas.width / 2, 120);
 
         // Subtitle
         ctx.font = "24px TelenorEvolution, sans-serif";
-        ctx.fillText(`${option.type} Trip`, canvas.width / 2, 155);
+        ctx.fillText(`${trip.type} Trip`, canvas.width / 2, 155);
 
         // Stay info
         ctx.font = "18px TelenorEvolution, sans-serif";
         ctx.fillText(
-          `${option.nights} ${option.nights > 1 ? "nights" : "night"} • ${
-            option.stay
+          `${trip.nights} ${trip.nights > 1 ? "nights" : "night"} • ${
+            trip.stay
           }`,
           canvas.width / 2,
           190
@@ -601,7 +601,7 @@ function TripDownloadOptions({ option, people }) {
         ctx.font = '18px Arial, sans-serif';
         ctx.textAlign = 'left';
         
-        option.highlights.forEach((highlight, index) => {
+        trip.highlights.forEach((highlight, index) => {
           if (index < 4) {
             const y = yPosition + 60 + (index * 25);
             ctx.fillStyle = '#3b82f6';
@@ -614,7 +614,7 @@ function TripDownloadOptions({ option, people }) {
         yPosition += 170;
         
         // GPStar Perks Section (if available)
-        if (option.gpstarOffers?.extras) {
+        if (trip.gpstarOffers?.extras) {
           ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
           ctx.shadowBlur = 10;
           ctx.shadowOffsetX = 0;
@@ -636,7 +636,7 @@ function TripDownloadOptions({ option, people }) {
           ctx.font = '18px Arial, sans-serif';
           ctx.textAlign = 'left';
           
-          option.gpstarOffers.extras.forEach((perk, index) => {
+          trip.gpstarOffers.extras.forEach((perk, index) => {
             if (index < 3) {
               const y = yPosition + 60 + (index * 25);
               ctx.fillStyle = '#10b981';
@@ -671,7 +671,7 @@ function TripDownloadOptions({ option, people }) {
         ctx.font = '18px Arial, sans-serif';
         ctx.textAlign = 'left';
         
-        option.itinerary.forEach((day, index) => {
+        trip.itinerary.forEach((day, index) => {
           if (index < 6) {
             const y = yPosition + 60 + (index * 25);
             ctx.fillStyle = '#8b5cf6';
@@ -684,7 +684,7 @@ function TripDownloadOptions({ option, people }) {
         yPosition += 200;
         
         // Roaming Suggestion (for international trips)
-        if (option.type === "International") {
+        if (trip.type === "International") {
           ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
           ctx.shadowBlur = 10;
           ctx.shadowOffsetX = 0;
@@ -742,7 +742,7 @@ function TripDownloadOptions({ option, people }) {
             pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
             
             // Save the PDF
-            const filename = `${option.name.replace(/\s+/g, '_')}_Trip_Details.pdf`;
+            const filename = `${trip.name.replace(/\s+/g, '_')}_Trip_Details.pdf`;
             pdf.save(filename);
           };
           

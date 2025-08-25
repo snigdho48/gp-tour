@@ -1,40 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useLanguage } from '../hooks/useLanguage.js';
-import { translateText } from '../utils/translation.js';
+import React from 'react';
 
 /**
- * An input component that translates its placeholder text using LibreTranslate API
+ * An input component that displays placeholder text (translation functionality removed)
  */
 const TranslatedInput = ({ 
   placeholder, 
   className = '', 
   ...props 
 }) => {
-  const { currentLanguage } = useLanguage();
-  const [translatedPlaceholder, setTranslatedPlaceholder] = useState(placeholder);
-
-  useEffect(() => {
-    const translatePlaceholder = async () => {
-      if (!placeholder || currentLanguage === 'en') {
-        setTranslatedPlaceholder(placeholder);
-        return;
-      }
-
-      try {
-        const result = await translateText(placeholder, 'en', currentLanguage);
-        setTranslatedPlaceholder(result || placeholder);
-      } catch {
-        setTranslatedPlaceholder(placeholder);
-      }
-    };
-
-    translatePlaceholder();
-  }, [placeholder, currentLanguage]);
-
+  // Simply return the placeholder as-is without translation
   return (
     <input 
       {...props}
-      placeholder={translatedPlaceholder}
+      placeholder={placeholder}
       className={className}
     />
   );
