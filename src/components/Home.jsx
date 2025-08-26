@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 // Import components
@@ -12,13 +12,15 @@ import {
   TermsAndConditions,
   HowToBeGPStar,
   PWAInstallPrompt,
-  LanguageToggle,
   LoadingOverlay,
-  TranslatedText
+  TranslatedText,
 } from "./index.js";
 
 // Import constants and utilities
 import { generateTripSuggestions } from "../utils/calculations.js";
+import LanguageToggleTest, {
+  GoogleTranslateLoader,
+} from "./LanguageToggle2.jsx";
 
 // Main App Component
 function Home() {
@@ -30,42 +32,39 @@ function Home() {
   const [exitingSuggestions, setExitingSuggestions] = useState([]);
   const [transitionKey, setTransitionKey] = useState(0);
 
-
   const handleGenerateSuggestions = async () => {
     if (!budgetBDT || !people) {
-      setError('Please enter budget and number of people');
+      setError("Please enter budget and number of people");
       return;
     }
 
-    setError('');
+    setError("");
     setIsLoading(true);
 
     try {
-    // If there are existing suggestions, fade them out one by one
-    if (suggestions.length > 0) {
-        
-      // Copy current suggestions to exiting state
-      setExitingSuggestions([...suggestions]);
-      setSuggestions([]); // Clear current suggestions immediately
+      // If there are existing suggestions, fade them out one by one
+      if (suggestions.length > 0) {
+        // Copy current suggestions to exiting state
+        setExitingSuggestions([...suggestions]);
+        setSuggestions([]); // Clear current suggestions immediately
 
-      // Start fading out cards one by one
-      const exitDelay = 100; // 100ms between each card exit
+        // Start fading out cards one by one
+        const exitDelay = 100; // 100ms between each card exit
 
-      // After all cards have started exiting, wait for animation to complete
+        // After all cards have started exiting, wait for animation to complete
         setTimeout(async () => {
-        setExitingSuggestions([]); // Remove exiting cards
-          setTransitionKey(prev => prev + 1);
-          
+          setExitingSuggestions([]); // Remove exiting cards
+          setTransitionKey((prev) => prev + 1);
+
           // Call API to get data, then use calculations
           await generateSuggestionsFromAPI();
-        }, (suggestions.length * exitDelay) + 800); // Wait for all exits + animation duration
-        
+        }, suggestions.length * exitDelay + 800); // Wait for all exits + animation duration
       } else {
         await generateSuggestionsFromAPI();
       }
     } catch (error) {
-      console.error('Error in handleGenerateSuggestions:', error);
-      setError('Failed to generate suggestions');
+      console.error("Error in handleGenerateSuggestions:", error);
+      setError("Failed to generate suggestions");
       setIsLoading(false);
     }
   };
@@ -73,12 +72,12 @@ function Home() {
   // Helper function to generate suggestions from API
   const generateSuggestionsFromAPI = async () => {
     try {
-          let peopleCount = parseInt(people) || 1;
-      if (people === '' || peopleCount <= 0) {
-            peopleCount = 1;
-            setPeople(1);
-          }
-      
+      let peopleCount = parseInt(people) || 1;
+      if (people === "" || peopleCount <= 0) {
+        peopleCount = 1;
+        setPeople(1);
+      }
+
       // Call API to get trip suggestions
       const response = await axios.post(
         "https://play.reachableads.com/receive_message",
@@ -143,102 +142,122 @@ CRITICAL REQUIREMENTS:
 Generate exactly 3 diverse options that maximize budget usage while staying within constraints. If you cannot generate 3 valid options, create alternative destinations or adjust costs to meet the requirement. Return the response as a valid JSON object.`,
         }
       );
-      
+
       // Process the response
       if (response.data && response.data.result) {
         try {
           // Clean the response string and parse as JSON
           const cleanResult = response.data.result.trim();
-          
-          console.log('Raw result:', response.data.result);
-          console.log('Cleaned result:', cleanResult);
-          
+
+          console.log("Raw result:", response.data.result);
+          console.log("Cleaned result:", cleanResult);
+
           // Parse the JSON string
           try {
             const parsedResult = JSON.parse(cleanResult);
-            console.log('Parsed result:', parsedResult);
-            
+            console.log("Parsed result:", parsedResult);
+
             // Extract trips array from the response - handle dynamic keys
             let tripOptions = null;
-            
+
             // Look for any key that contains trip data (case-insensitive)
             for (const key in parsedResult) {
-              if (typeof parsedResult[key] === 'object' && Array.isArray(parsedResult[key])) {
+              if (
+                typeof parsedResult[key] === "object" &&
+                Array.isArray(parsedResult[key])
+              ) {
                 // Check if this array contains valid trip objects
-                if (parsedResult[key].length > 0 && 
-                    parsedResult[key][0] && 
-                    typeof parsedResult[key][0] === 'object' && 
-                    parsedResult[key][0].type && 
-                    parsedResult[key][0].name) {
+                if (
+                  parsedResult[key].length > 0 &&
+                  parsedResult[key][0] &&
+                  typeof parsedResult[key][0] === "object" &&
+                  parsedResult[key][0].type &&
+                  parsedResult[key][0].name
+                ) {
                   tripOptions = parsedResult[key];
                   console.log(`Found trip data in key: "${key}"`);
                   break;
                 }
               }
             }
-            
+
             // If no trips found in nested keys, check if the root is an array
             if (!tripOptions && Array.isArray(parsedResult)) {
-              if (parsedResult.length > 0 && 
-                  parsedResult[0] && 
-                  typeof parsedResult[0] === 'object' && 
-                  parsedResult[0].type && 
-                  parsedResult[0].name) {
+              if (
+                parsedResult.length > 0 &&
+                parsedResult[0] &&
+                typeof parsedResult[0] === "object" &&
+                parsedResult[0].type &&
+                parsedResult[0].name
+              ) {
                 tripOptions = parsedResult;
-                console.log('Found trip data in root array');
+                console.log("Found trip data in root array");
               }
             }
-            
+
             if (!tripOptions) {
-              console.error('No valid trip data found in response:', parsedResult);
-              setError('No valid trip data found in API response');
+              console.error(
+                "No valid trip data found in response:",
+                parsedResult
+              );
+              setError("No valid trip data found in API response");
               setSuggestions([]);
               return;
             }
-            
-            console.log('Trip options from API:', tripOptions);
-            
+
+            console.log("Trip options from API:", tripOptions);
+
             // Ensure we have exactly 3 plans
             if (tripOptions.length < 3) {
-              console.warn(`API returned only ${tripOptions.length} plans, expected 3`);
-              setError(`API returned only ${tripOptions.length} plans. Please try again to get exactly 3 options.`);
+              console.warn(
+                `API returned only ${tripOptions.length} plans, expected 3`
+              );
+              setError(
+                `API returned only ${tripOptions.length} plans. Please try again to get exactly 3 options.`
+              );
               setSuggestions([]);
               return;
             }
-            
+
             if (tripOptions.length > 3) {
-              console.warn(`API returned ${tripOptions.length} plans, taking first 3`);
+              console.warn(
+                `API returned ${tripOptions.length} plans, taking first 3`
+              );
               tripOptions = tripOptions.slice(0, 3);
             }
-            
+
             // Use the calculation function to process the API data
-            const result = generateTripSuggestions(budgetBDT, peopleCount, tripOptions);
-          setError(result.error);
-          setSuggestions(result.suggestions);
+            const result = generateTripSuggestions(
+              budgetBDT,
+              peopleCount,
+              tripOptions
+            );
+            setError(result.error);
+            setSuggestions(result.suggestions);
           } catch (parseError) {
-            console.error('JSON Parse Error:', parseError);
-            console.error('Raw result:', response.data.result);
-            setError('Failed to parse API response');
+            console.error("JSON Parse Error:", parseError);
+            console.error("Raw result:", response.data.result);
+            setError("Failed to parse API response");
             setSuggestions([]);
           }
         } catch (parseError) {
-          console.error('JSON Parse Error:', parseError);
-          console.error('Raw result:', response.data.result);
-          setError('Failed to parse API response');
+          console.error("JSON Parse Error:", parseError);
+          console.error("Raw result:", response.data.result);
+          setError("Failed to parse API response");
           setSuggestions([]);
         }
-    } else {
+      } else {
         // No API data available
-        console.error('No API response data');
-        setError('No trip data received from API');
+        console.error("No API response data");
+        setError("No trip data received from API");
         setSuggestions([]);
       }
     } catch (apiError) {
-      console.error('API Error:', apiError);
-      setError('Failed to fetch trip suggestions from API');
+      console.error("API Error:", apiError);
+      setError("Failed to fetch trip suggestions from API");
       setSuggestions([]);
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -257,18 +276,19 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
   const [showHowToBeGPStar, setShowHowToBeGPStar] = useState(false);
 
   return (
-    <div className='min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col'>
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col">
       {/* Theme Toggle Button */}
-      <div className='fixed top-4 right-4 z-10 sm:top-8'>
+      <div className="fixed top-4 right-4 z-10 sm:top-8">
         <ThemeToggle />
       </div>
 
       {/* Language Toggle Button */}
-      <div className='fixed top-4 left-4 z-10 sm:top-8'>
-        <LanguageToggle />
+      <div className="fixed top-4 left-4 z-10 sm:top-8">
+        <LanguageToggleTest />
+        <GoogleTranslateLoader />
       </div>
 
-      <div className='flex-1 container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full'>
+      <div className="flex-1 container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full">
         <BudgetForm
           budgetBDT={budgetBDT}
           setBudgetBDT={setBudgetBDT}
@@ -281,20 +301,20 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
         />
 
         {error && (
-          <div className='bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm'>
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm">
             <TranslatedText text={error} />
           </div>
         )}
 
         {/* Results Container - maintains consistent height */}
-        <div className='relative h-auto w-full'>
+        <div className="relative h-auto w-full">
           {/* Exiting Cards - fade out one by one with absolute positioning */}
           {exitingSuggestions.length > 0 && (
-            <div className='absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 max-w-full'>
+            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 max-w-full">
               {exitingSuggestions.map((opt, idx) => (
                 <div
                   key={`exiting-${opt.name}-${idx}`}
-                  className='animate-fade-out'
+                  className="animate-fade-out"
                   style={{
                     animationDelay: `${idx * 100}ms`,
                     animationFillMode: "both",
@@ -304,7 +324,6 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
                     trip={opt}
                     people={people}
                     onViewDetails={handleViewDetails}
-          
                   />
                 </div>
               ))}
@@ -315,12 +334,12 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
           {suggestions.length > 0 && (
             <div
               key={`grid-${transitionKey}`}
-              className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-3 lg:gap-4 xl:gap-6 max-w-full'
+              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-3 lg:gap-4 xl:gap-6 max-w-full"
             >
               {suggestions.map((opt, idx) => (
                 <div
                   key={`${opt.name}-${idx}-${transitionKey}`}
-                  className='animate-fade-in-up'
+                  className="animate-fade-in-up"
                   style={{
                     animationDelay: `${idx * 150}ms`,
                     animationFillMode: "both",
@@ -341,7 +360,7 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
             exitingSuggestions.length === 0 &&
             !error &&
             !isLoading && (
-              <div className='animate-fade-in w-full'>
+              <div className="animate-fade-in w-full">
                 <EmptyState />
               </div>
             )}
@@ -352,17 +371,17 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
       </div>
 
       {/* Footer Links - Fixed at bottom */}
-      <div className='mt-auto container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl w-full'>
-        <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center'>
+      <div className="mt-auto container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center">
           <button
             onClick={() => setShowTerms(true)}
-            className='text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline'
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
           >
             <TranslatedText text="Terms & Conditions" />
           </button>
           <button
             onClick={() => setShowHowToBeGPStar(true)}
-            className='text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline'
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
           >
             <TranslatedText text="How to be a GPStar" />
           </button>

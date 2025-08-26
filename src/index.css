@@ -2,36 +2,37 @@
 
 /* Custom Fonts */
 @font-face {
-  font-family: 'TelenorEvolution';
-  src: url('./assets/fonts/TelenorEvolution-Light.otf') format('opentype');
+  font-family: "TelenorEvolution";
+  src: url("./assets/fonts/TelenorEvolution-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TelenorEvolution';
-  src: url('./assets/fonts/TelenorEvolution-Normal.otf') format('opentype');
+  font-family: "TelenorEvolution";
+  src: url("./assets/fonts/TelenorEvolution-Normal.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TelenorEvolution';
-  src: url('./assets/fonts/TelenorEvolution-Medium.otf') format('opentype');
+  font-family: "TelenorEvolution";
+  src: url("./assets/fonts/TelenorEvolution-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TelenorEvolution';
-  src: url('./assets/fonts/TelenorEvolution-Bold.otf') format('opentype');
+  font-family: "TelenorEvolution";
+  src: url("./assets/fonts/TelenorEvolution-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TelenorEvolution';
-  src: url('./assets/fonts/TelenorEvolution-ExtraBoldSlanted.otf') format('opentype');
+  font-family: "TelenorEvolution";
+  src: url("./assets/fonts/TelenorEvolution-ExtraBoldSlanted.otf")
+    format("opentype");
   font-weight: 800;
   font-style: italic;
 }
@@ -39,7 +40,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant motion-safe (&:where(.motion-safe, .motion-safe *));
 @custom-variant motion-reduce (&:where(.motion-reduce, .motion-reduce *));
-
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -81,15 +81,33 @@ body {
 }
 
 /* Custom font weights */
-.font-thin { font-weight: 100; }
-.font-extralight { font-weight: 200; }
-.font-light { font-weight: 300; }
-.font-normal { font-weight: 400; }
-.font-medium { font-weight: 500; }
-.font-semibold { font-weight: 600; }
-.font-bold { font-weight: 700; }
-.font-extrabold { font-weight: 800; }
-.font-black { font-weight: 900; }
+.font-thin {
+  font-weight: 100;
+}
+.font-extralight {
+  font-weight: 200;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-extrabold {
+  font-weight: 800;
+}
+.font-black {
+  font-weight: 900;
+}
 
 /* Smooth scrolling */
 html {
@@ -107,7 +125,8 @@ html {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -116,4 +135,37 @@ html, body {
 :focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
+}
+
+#goog-gt-tt {
+  display: none !important;
+}
+
+/* Hide Google Translate top bar */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+/* Optional: hide the tooltip popup */
+.goog-tooltip {
+  display: none !important;
+}
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+iframe {
+  background-color: #1a2434 !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  visibility: hidden !important;
+  display: none !important;
 }
