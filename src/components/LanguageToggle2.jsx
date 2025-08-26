@@ -14,7 +14,9 @@ function dispatchChange(el) {
       const ev = document.createEvent("HTMLEvents");
       ev.initEvent("change", true, false);
       el.dispatchEvent(ev);
-    } catch {}
+    } catch(e) {
+      console.log(e)
+    }
   } catch (e) {
     console.warn("dispatchChange error", e);
   }
@@ -113,6 +115,7 @@ async function applyGoogleTranslateTarget(
         );
       } catch (e) {
         // ignore
+        console.log(e)
       }
     }
     // try once more to hit the select if it appeared
@@ -150,10 +153,10 @@ const languages = [
 ];
 
 const LanguageToggleTest = () => {
-  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [currentLanguage, setCurrentLanguage] = useState("bn");
 
   useEffect(() => {
-    const saved = localStorage.getItem("preferredLanguage") || "en";
+    const saved = localStorage.getItem("preferredLanguage") || "bn";
     setCurrentLanguage(saved);
 
     // Wait a tiny bit to let the Google widget initialize, then apply

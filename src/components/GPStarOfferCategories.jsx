@@ -3,7 +3,7 @@ import TranslatedText from './TranslatedText';
 
 const GPStarOfferCategories = () => {
   return (
-    <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl">
+    <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl" id='gpstar-offer-categories'>
       <div className='p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl sm:rounded-2xl border border-amber-200 dark:border-amber-800 shadow-xl transition-all duration-500'>
         <TranslatedText
           text='GPStar Offer'

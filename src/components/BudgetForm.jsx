@@ -25,7 +25,7 @@ function BudgetForm({ budgetBDT, setBudgetBDT, people, setPeople, onGenerate, is
 
   if (!showForm) {
     return (
-      <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-[60]">
+      <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-[60] ">
         <TranslatedButton
           onClick={handleRegenerate}
           normalText='Regenerate'

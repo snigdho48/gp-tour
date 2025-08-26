@@ -4,6 +4,7 @@ import { breakdownBDT } from "../utils/calculations.js";
 import TranslatedText from "./TranslatedText";
 import TranslatedButton from "./TranslatedButton";
 import TripDownloadOptions from "./TripDownloadOptions.jsx";
+import { animateScroll as scroll } from "react-scroll";
 
 function TripCard({ trip, people, onViewDetails }) {
   const breakdown = trip ? breakdownBDT(trip) : null;
@@ -134,12 +135,24 @@ function TripCard({ trip, people, onViewDetails }) {
                 />
                 <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm font-inter">
                   {trip.gpstarOffers.extras.map((x, i) => (
-                    <TranslatedText
+                    <li
                       key={i}
-                      text={x}
-                      className="text-blue-600 dark:text-blue-400 font-medium transition-all duration-200 break-words leading-tight"
-                      as="li"
-                    />
+                      className="text-blue-600 dark:text-blue-400 font-medium transition-all duration-200 break-words leading-tight cursor-pointer hover:text-blue-800 dark:hover:text-blue-300"
+                                             onClick={() => {
+                         const element = document.getElementById('gpstar-offer-categories');
+                         if (element) {
+                           const offsetTop = element.offsetTop;
+                           scroll.scrollTo(offsetTop, {
+                             duration: 800,
+                             smooth: true,
+                             offset: -20
+                           });
+                         }
+                       }}
+                      title="Click to view GPStar offers"
+                    >
+                      {x}
+                    </li>
                   ))}
                 </ul>
               </>

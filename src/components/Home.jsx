@@ -368,7 +368,7 @@ OUTPUT: Respond with the JSON object only.`,
   return (
     <div className='min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col'>
       {/* Theme Toggle Button */}
-      <div className='fixed top-4 right-4 z-10 sm:top-8'>
+      <div className='fixed top-6 right-4 z-10 sm:top-8'>
         <ThemeToggle />
       </div>
 
@@ -378,7 +378,7 @@ OUTPUT: Respond with the JSON object only.`,
         <GoogleTranslateLoader />
       </div>
 
-      <div className='flex-1 container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full'>
+      <div className='flex-1  container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full mt-12 lg:mt-0 xl:mt-0'>
         <BudgetForm
           budgetBDT={budgetBDT}
           setBudgetBDT={setBudgetBDT}
