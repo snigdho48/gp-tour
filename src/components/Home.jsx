@@ -221,7 +221,7 @@ Return a JSON object with this structure:
 3. Each trip not cost more than ${budgetBDT} BDT.
 4. Follow all cost distribution rules by trip type.
 5. Every trip must include all required fields as shown.
-6. Output must be valid JSON under \"trips"\ key.
+6. Output must be valid JSON under "trips" key.
 7. If ${budgetBDT} BDT < 5,000 BDT then suggest No trip available and return empty array.
 8. No explanations — just return the pure JSON object.
 
@@ -366,19 +366,19 @@ OUTPUT: Respond with the JSON object only.`,
   const [showHowToBeGPStar, setShowHowToBeGPStar] = useState(false);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col">
+    <div className='min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col'>
       {/* Theme Toggle Button */}
-      <div className="fixed top-4 right-4 z-10 sm:top-8">
+      <div className='fixed top-4 right-4 z-10 sm:top-8'>
         <ThemeToggle />
       </div>
 
       {/* Language Toggle Button */}
-      <div className="fixed top-4 left-4 z-10 sm:top-8">
+      <div className='fixed top-4 left-4 z-10 sm:top-8'>
         <LanguageToggleTest />
         <GoogleTranslateLoader />
       </div>
 
-      <div className="flex-1 container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full">
+      <div className='flex-1 container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full'>
         <BudgetForm
           budgetBDT={budgetBDT}
           setBudgetBDT={setBudgetBDT}
@@ -391,20 +391,20 @@ OUTPUT: Respond with the JSON object only.`,
         />
 
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm">
+          <div className='bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm'>
             <TranslatedText text={error} />
           </div>
         )}
 
         {/* Results Container - maintains consistent height */}
-        <div className="relative h-auto w-full">
+        <div className='relative h-auto w-full'>
           {/* Exiting Cards - fade out one by one with absolute positioning */}
           {exitingSuggestions.length > 0 && (
-            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 max-w-full">
+            <div className='absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2 md:gap-2 lg:gap-3 xl:gap-4 max-w-full'>
               {exitingSuggestions.map((opt, idx) => (
                 <div
                   key={`exiting-${opt.name}-${idx}`}
-                  className="animate-fade-out"
+                  className='animate-fade-out'
                   style={{
                     animationDelay: `${idx * 100}ms`,
                     animationFillMode: "both",
@@ -424,12 +424,12 @@ OUTPUT: Respond with the JSON object only.`,
           {suggestions.length > 0 && (
             <div
               key={`grid-${transitionKey}`}
-              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-3 lg:gap-4 xl:gap-6 max-w-full"
+              className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2 md:gap-2 lg:gap-3 xl:gap-4 max-w-full'
             >
               {suggestions.map((opt, idx) => (
                 <div
                   key={`${opt.name}-${idx}-${transitionKey}`}
-                  className="animate-fade-in-up"
+                  className='animate-fade-in-up'
                   style={{
                     animationDelay: `${idx * 150}ms`,
                     animationFillMode: "both",
@@ -450,7 +450,7 @@ OUTPUT: Respond with the JSON object only.`,
             exitingSuggestions.length === 0 &&
             !error &&
             !isLoading && (
-              <div className="animate-fade-in w-full">
+              <div className='animate-fade-in w-full'>
                 <EmptyState />
               </div>
             )}
@@ -461,19 +461,19 @@ OUTPUT: Respond with the JSON object only.`,
       </div>
 
       {/* Footer Links - Fixed at bottom */}
-      <div className="mt-auto container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl w-full">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center">
+      <div className='mt-auto container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl w-full'>
+        <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center'>
           <button
             onClick={() => setShowTerms(true)}
-            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
+            className='text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline'
           >
-            <TranslatedText text="Terms & Conditions" />
+            <TranslatedText text='Terms & Conditions' />
           </button>
           <button
             onClick={() => setShowHowToBeGPStar(true)}
-            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
+            className='text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline'
           >
-            <TranslatedText text="How to be a GPStar" />
+            <TranslatedText text='How to be a GPStar' />
           </button>
         </div>
       </div>

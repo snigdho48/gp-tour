@@ -87,7 +87,7 @@ export function generateTripSuggestions(budgetBDT, people, allOptions) {
   // filteredOptions.sort((a, b) => b.groupBDT - a.groupBDT);
 
   // Ensure we have exactly 3 options
-  if (filteredOptions.length < 3) {
+  if (sortbytriptype.length < 3) {
     return {
       error: `Only ${filteredOptions.length} affordable options found. Try increasing budget or reducing people.`,
       suggestions: filteredOptions,
@@ -95,7 +95,7 @@ export function generateTripSuggestions(budgetBDT, people, allOptions) {
   }
 
   // Select top 3 options
-  const picks = filteredOptions;
+  const picks = sortbytriptype;
 
   return { error: "", suggestions: picks };
 }
