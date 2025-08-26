@@ -79,34 +79,119 @@ function Home() {
       }
 
       // Call API to get trip suggestions
+      //       const response = await axios.post(
+      //         "https://play.reachableads.com/receive_message",
+      //         {
+      //           content: `You are a travel planning expert. Generate EXACTLY 3 trip suggestions for budget ${budgetBDT} BDT and ${peopleCount} people.
+
+      // THINKING PROCESS:
+      // 1. Each plan (trip cost for ${peopleCount} people) should be 85-95% of ${budgetBDT} BDT (maximize budget usage per plan)
+      // 2. Smart filtering based on budget:
+      //    - If budget ≥ 300,000 BDT: Suggest ONLY International trips and 1 Domestic trip (ignore Day Tour)
+      //    - If budget < 50,000 BDT per person: Suggest ONLY Domestic/Day Tour (ignore International)
+      //    - Otherwise: Mix of International (60%), Domestic (30%), Day Tour (10%)
+      // 3. Ensure realistic cost distribution based on destination type
+      // 4. ALWAYS return exactly 3 plans - never 1, never 2, never 4
+
+      // COST STRUCTURE GUIDELINES:
+      // - International: Flight (40-50%), Hotel (25-30%), Transport (10-15%), Activities (15-20%)
+      // - Domestic: Flight (0-20%), Hotel (30-40%), Transport (20-30%), Activities (30-40%)
+      // - Day Tour: Transport (40-50%), Activities (40-50%), Food (10-20%)
+
+      // BUDGET TARGETS:
+      // - Target total cost: ${Math.round(budgetBDT * 0.95)} BDT (95% of budget)
+      // - Allow 5-10% buffer for unexpected expenses
+
+      // RESPONSE FORMAT - Use EXACTLY these keys and structure in JSON format:
+      // {
+      //   "trips": [
+      //     {
+      //       "type": "International|Domestic|Day Tour",
+      //       "name": "Destination Name",
+      //       "nights": number,
+      //       "breakdownBDT": {
+      //         "flight": number,
+      //         "transport": number,
+      //         "hotelPerNight": number,
+      //         "activities": number
+      //       },
+      //       "stay": "Accommodation description",
+      //       "highlights": ["Highlight 1", "Highlight 2"],
+      //       "itinerary": ["Day 1: Activity", "Day 2: Activity"],
+      //       "gpstarOffers": {
+      //         "flightDiscountPct": number,
+      //         "hotelDiscountPct": number,
+      //         "extras": ["GPStar-OFFER1", "GPStar-OFFER2"]
+      //       }
+      //     }
+      //   ]
+      // }
+
+      // CRITICAL REQUIREMENTS:
+      // 1. ALWAYS return exactly 3 trip plans - this is mandatory
+      // 2. If budget ≥ 300,000 BDT: All 3 must be International destinations
+      // 3. If budget < 50,000 BDT per person: All 3 must be Domestic/Day Tour
+      // 4. Total cost per trip × ${peopleCount} must be 85-95% of ${budgetBDT} BDT
+      // 5. breakdownBDT values must be realistic for destination type
+      // 6. Always return under "trips" key
+      // 7. Use breakdownBDT (not breakdownUSD)
+      // 8. Ensure all required fields are present
+      // 9. Return response in valid JSON format
+      // 10. Return 3 trip options each generation.
+
+      // Generate exactly 3 diverse options that maximize budget usage while staying within constraints. If you cannot generate 3 valid options, create alternative destinations or adjust costs to meet the requirement. Return the response as a valid JSON object.`,
+      //         }
+      //       );
+
       const response = await axios.post(
         "https://play.reachableads.com/receive_message",
         {
-          content: `You are a travel planning expert. Generate EXACTLY 3 trip suggestions for budget ${budgetBDT} BDT and ${peopleCount} people.
+          content: `You are a professional travel planner. Based on the inputs below, generate EXACTLY 3 different, standalone trip plans in valid JSON format.
 
-THINKING PROCESS:
-1. Total trip cost for ${peopleCount} people should be 85-95% of ${budgetBDT} BDT (maximize budget usage)
-2. Smart filtering based on budget:
-   - If budget ≥ 300,000 BDT: Suggest ONLY International trips and 1 Domestic trip (ignore Day Tour)
-   - If budget < 50,000 BDT per person: Suggest ONLY Domestic/Day Tour (ignore International)
-   - Otherwise: Mix of International (60%), Domestic (30%), Day Tour (10%)
-3. Ensure realistic cost distribution based on destination type
-4. ALWAYS return exactly 3 plans - never 2, never 4
+INPUTS:
+- Total Budget: ${budgetBDT} BDT
+- People Count: ${peopleCount}
 
-COST STRUCTURE GUIDELINES:
-- International: Flight (40-50%), Hotel (25-30%), Transport (10-15%), Activities (15-20%)
-- Domestic: Flight (0-20%), Hotel (30-40%), Transport (20-30%), Activities (30-40%)
-- Day Tour: Transport (40-50%), Activities (40-50%), Food (10-20%)
+----------------------------
+🎯 OBJECTIVE
+----------------------------
+Create 3 clearly distinct trip options (different destinations, experiences, and cost structures) so the user can compare and choose one. Each trip must be complete, standalone, and realistic.
 
-BUDGET TARGETS:
-- Target total cost: ${Math.round(budgetBDT * 0.95)} BDT (95% of budget)
-- Allow 5-10% buffer for unexpected expenses
+----------------------------
+🚦 RULES & LOGIC
+----------------------------
+1. Total cost across ${peopleCount} people must be between *85-95%* of ${budgetBDT} BDT (maximize budget usage).
+2. Each trip not cost more than ${budgetBDT} BDT.
+3. If ${budgetBDT} BDT < 5,000 BDT then suggest No trip available and return empty array.
+4. Choose trip types based on budget logic:
+   - If total budget ≥ 300,000 BDT: *Only International trips* (all 3)
+   - If budget < 50,000 BDT per person: *Only Domestic and/or Day Tours*
+   - Otherwise: *Mix*: 1-2 International, 1 Domestic, 0-1 Day Tour
 
-RESPONSE FORMAT - Use EXACTLY these keys and structure in JSON format:
+5. Cost breakdown must follow destination type norms:
+
+| Type         | Flight     | Hotel        | Transport     | Activities     | Food (if Day Tour) |
+|--------------|------------|--------------|---------------|----------------|---------------------|
+| International| 40-50%     | 25-30%       | 10-15%        | 15-20%         | —                   |
+| Domestic     | 0-20%      | 30-40%       | 20-30%        | 30-40%         | —                   |
+| Day Tour     | —          | —            | 40-50%        | 40-50%         | 10-20%              |
+
+6. Each of the 3 trips must be *significantly different* from the others. Vary:
+   - Destination/country/city
+   - Trip type (International/Domestic/Day Tour)
+   - Length (nights)
+   - Itinerary and highlights
+   - Activities or themes (e.g., adventure, nature, shopping, history)
+
+----------------------------
+🧾 RESPONSE FORMAT (STRICT JSON)
+----------------------------
+Return a JSON object with this structure:
+
 {
   "trips": [
     {
-      "type": "International|Domestic|Day Tour",
+      "type": "International | Domestic | Day Tour",
       "name": "Destination Name",
       "nights": number,
       "breakdownBDT": {
@@ -123,23 +208,33 @@ RESPONSE FORMAT - Use EXACTLY these keys and structure in JSON format:
         "hotelDiscountPct": number,
         "extras": ["GPStar-OFFER1", "GPStar-OFFER2"]
       }
-    }
+    },
+    {...}, {...} // 2 more trips
   ]
 }
 
-CRITICAL REQUIREMENTS:
-1. ALWAYS return exactly 3 trip plans - this is mandatory
-2. If budget ≥ 300,000 BDT: All 3 must be International destinations
-3. If budget < 50,000 BDT per person: All 3 must be Domestic/Day Tour
-4. Total cost per trip × ${peopleCount} must be 85-95% of ${budgetBDT} BDT
-5. breakdownBDT values must be realistic for destination type
-6. Always return under "trips" key
-7. Use breakdownBDT (not breakdownUSD)
-8. Ensure all required fields are present
-9. Return response in valid JSON format
-10. Return 3 trip options each generation.
+----------------------------
+📌 STRICT REQUIREMENTS
+----------------------------
+1. *Always return exactly 3 complete and different trips.
+2. *Total cost * ${peopleCount} people* must be within 85-95% of ${budgetBDT} BDT.
+3. Each trip not cost more than ${budgetBDT} BDT.
+4. Follow all cost distribution rules by trip type.
+5. Every trip must include all required fields as shown.
+6. Output must be valid JSON under \"trips"\ key.
+7. If ${budgetBDT} BDT < 5,000 BDT then suggest No trip available and return empty array.
+8. No explanations — just return the pure JSON object.
 
-Generate exactly 3 diverse options that maximize budget usage while staying within constraints. If you cannot generate 3 valid options, create alternative destinations or adjust costs to meet the requirement. Return the response as a valid JSON object.`,
+----------------------------
+🛡️ FAILSAFE CLAUSE
+----------------------------
+If exact cost % or type mix is hard to achieve, adjust:
+- Destination (choose affordable alternative)
+- Duration (fewer nights)
+- Hotel tier (budget vs premium)
+But ALWAYS return 3 valid, complete, and distinct trip plans that follow the rules above.
+
+OUTPUT: Respond with the JSON object only.`,
         }
       );
 
@@ -200,7 +295,9 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
                 "No valid trip data found in response:",
                 parsedResult
               );
-              setError("No valid trip data found in API response");
+              setError(
+                "No valid trip data found in API response. Please check your budget and number of people."
+              );
               setSuggestions([]);
               return;
             }
@@ -217,13 +314,6 @@ Generate exactly 3 diverse options that maximize budget usage while staying with
               );
               setSuggestions([]);
               return;
-            }
-
-            if (tripOptions.length > 3) {
-              console.warn(
-                `API returned ${tripOptions.length} plans, taking first 3`
-              );
-              tripOptions = tripOptions.slice(0, 3);
             }
 
             // Use the calculation function to process the API data
