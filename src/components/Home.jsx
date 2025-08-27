@@ -148,7 +148,11 @@ function Home() {
         {
           content: `You are a professional travel planner. Based on the inputs below, generate EXACTLY 3 different, standalone trip plans in valid JSON format.
 
-INPUTS:
+          TASK: Generate EXACTLY 3 distinct trip plans in VALID JSON format. Follow ALL rules strictly.
+
+----------------------------
+INPUTS
+----------------------------
 - Total Budget: ${budgetBDT} BDT
 - People Count: ${peopleCount}
 
@@ -160,15 +164,17 @@ Create 3 clearly distinct trip options (different destinations, experiences, and
 ----------------------------
 🚦 RULES & LOGIC
 ----------------------------
-1. Total cost across ${peopleCount} people must be between *85-95%* of ${budgetBDT} BDT (maximize budget usage).
-2. Each trip not cost more than ${budgetBDT} BDT.
-3. If ${budgetBDT} BDT < 5,000 BDT then suggest No trip available and return empty array.
-4. Choose trip types based on budget logic:
-   - If total budget ≥ 300,000 BDT: *Only International trips* (all 3)
-   - If budget < 50,000 BDT per person: *Only Domestic and/or Day Tours*
-   - Otherwise: *Mix*: 1-2 International, 1 Domestic, 0-1 Day Tour
-
-5. Cost breakdown must follow destination type norms:
+1. If ${budgetBDT} < 5000 → return: { "trips": [] }
+2. Always return exactly 3 trips inside { "trips": [ ... ] }
+3. Total cost for ALL ${peopleCount} people combined must be 85%-95% of ${budgetBDT}.
+4. Each trip cost ≤ ${budgetBDT} and total cost is not more than ${budgetBDT} BDT.
+5. Trip type logic:
+   - If budget ≥ 300000 → all 3 must be International and total cost is not more than ${budgetBDT} BDT.
+   - If budget ≥ 200000 and < 300000 → mix (2 International, 1 Domestic) and total cost is not more than ${budgetBDT} BDT.
+   - If budget ≥ 100000 and < 200000 → mix (1 International, 1 Domestic, 1 Day Tour) and total cost is not more than ${budgetBDT} BDT.
+   - If budget < (50000 * ${peopleCount}) → all 3 must be Domestic or Day Tours and total cost is not more than ${budgetBDT} BDT.
+   - If budget < 5000 -> return: { "trips": [] }
+6. Cost breakdown must follow destination type norms:
 
 | Type         | Flight     | Hotel        | Transport     | Activities     | Food (if Day Tour) |
 |--------------|------------|--------------|---------------|----------------|---------------------|
@@ -176,7 +182,7 @@ Create 3 clearly distinct trip options (different destinations, experiences, and
 | Domestic     | 0-20%      | 30-40%       | 20-30%        | 30-40%         | —                   |
 | Day Tour     | —          | —            | 40-50%        | 40-50%         | 10-20%              |
 
-6. Each of the 3 trips must be *significantly different* from the others. Vary:
+7. Each of the 3 trips must be *significantly different* from the others. Vary:
    - Destination/country/city
    - Trip type (International/Domestic/Day Tour)
    - Length (nights)
@@ -217,13 +223,12 @@ Return a JSON object with this structure:
 📌 STRICT REQUIREMENTS
 ----------------------------
 1. *Always return exactly 3 complete and different trips.
-2. *Total cost * ${peopleCount} people* must be within 85-95% of ${budgetBDT} BDT.
-3. Each trip not cost more than ${budgetBDT} BDT.
+2. Always return exactly 3 trips unless Rule 1 applies.
+3. Follow cost rules strictly.
 4. Follow all cost distribution rules by trip type.
 5. Every trip must include all required fields as shown.
 6. Output must be valid JSON under "trips" key.
-7. If ${budgetBDT} BDT < 5,000 BDT then suggest No trip available and return empty array.
-8. No explanations — just return the pure JSON object.
+7. No explanations — just return the pure JSON object.
 
 ----------------------------
 🛡️ FAILSAFE CLAUSE
@@ -366,19 +371,19 @@ OUTPUT: Respond with the JSON object only.`,
   const [showHowToBeGPStar, setShowHowToBeGPStar] = useState(false);
 
   return (
-    <div className='min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col'>
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500 flex flex-col">
       {/* Theme Toggle Button */}
-      <div className='fixed top-6 right-4 z-10 sm:top-8'>
+      <div className="fixed top-6 right-4 z-10 sm:top-8">
         <ThemeToggle />
       </div>
 
       {/* Language Toggle Button */}
-      <div className='fixed top-4 left-4 z-10 sm:top-8'>
+      <div className="fixed top-4 left-4 z-10 sm:top-8">
         <LanguageToggleTest />
         <GoogleTranslateLoader />
       </div>
 
-      <div className='flex-1  container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full mt-12 lg:mt-0 xl:mt-0'>
+      <div className="flex-1  container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 max-w-6xl w-full mt-12 lg:mt-0 xl:mt-0">
         <BudgetForm
           budgetBDT={budgetBDT}
           setBudgetBDT={setBudgetBDT}
@@ -391,20 +396,20 @@ OUTPUT: Respond with the JSON object only.`,
         />
 
         {error && (
-          <div className='bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm'>
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-red-700 dark:text-red-300 font-inter text-sm">
             <TranslatedText text={error} />
           </div>
         )}
 
         {/* Results Container - maintains consistent height */}
-        <div className='relative h-auto w-full'>
+        <div className="relative h-auto w-full">
           {/* Exiting Cards - fade out one by one with absolute positioning */}
           {exitingSuggestions.length > 0 && (
-            <div className='absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2 md:gap-2 lg:gap-3 xl:gap-4 max-w-full'>
+            <div className="absolute inset-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2 md:gap-2 lg:gap-3 xl:gap-4 max-w-full">
               {exitingSuggestions.map((opt, idx) => (
                 <div
                   key={`exiting-${opt.name}-${idx}`}
-                  className='animate-fade-out'
+                  className="animate-fade-out"
                   style={{
                     animationDelay: `${idx * 100}ms`,
                     animationFillMode: "both",
@@ -424,12 +429,12 @@ OUTPUT: Respond with the JSON object only.`,
           {suggestions.length > 0 && (
             <div
               key={`grid-${transitionKey}`}
-              className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2 md:gap-2 lg:gap-3 xl:gap-4 max-w-full'
+              className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2 md:gap-2 lg:gap-3 xl:gap-4 max-w-full"
             >
               {suggestions.map((opt, idx) => (
                 <div
                   key={`${opt.name}-${idx}-${transitionKey}`}
-                  className='animate-fade-in-up'
+                  className="animate-fade-in-up"
                   style={{
                     animationDelay: `${idx * 150}ms`,
                     animationFillMode: "both",
@@ -450,7 +455,7 @@ OUTPUT: Respond with the JSON object only.`,
             exitingSuggestions.length === 0 &&
             !error &&
             !isLoading && (
-              <div className='animate-fade-in w-full'>
+              <div className="animate-fade-in w-full">
                 <EmptyState />
               </div>
             )}
@@ -461,19 +466,19 @@ OUTPUT: Respond with the JSON object only.`,
       </div>
 
       {/* Footer Links - Fixed at bottom */}
-      <div className='mt-auto container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl w-full'>
-        <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center'>
+      <div className="mt-auto container mx-auto px-3 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 max-w-6xl w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center">
           <button
             onClick={() => setShowTerms(true)}
-            className='text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline'
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
           >
-            <TranslatedText text='Terms & Conditions' />
+            <TranslatedText text="Terms & Conditions" />
           </button>
           <button
             onClick={() => setShowHowToBeGPStar(true)}
-            className='text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline'
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 font-inter underline"
           >
-            <TranslatedText text='How to be a GPStar' />
+            <TranslatedText text="How to be a GPStar" />
           </button>
         </div>
       </div>
